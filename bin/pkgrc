@@ -1,7 +1,31 @@
 #!/usr/bin/env node
+var completion = require('../lib/completion');
 
-console.log('Executing pkgrc bin file');
+// this file is mainly just an example of usage
 
-var args = process.argv.slice(2);
-console.log('Args are: ', args);
+// pass the module name, will change to module
+// reference + dir walk to find a package.json
+completion.complete('pkgrc', function(err, o) {
+  if(err || !o) return;
 
+  // options:
+  // - line: the full line from compgen
+  // - partial: the partial line, part of the line where the cursor is
+  // - words: the word counter, a number mapping the number of words from compgen
+  // - point: cursor offset
+
+  //
+  // Setting completion output is simply a matter of writing to the console
+  //
+
+  console.log(o.line);
+  console.log(o.partial);
+  console.log(o.words);
+  console.log(o.point);
+  console.log(o.last);
+  console.log(o.lastPartial);
+
+  if(o.partial === 'hello') {
+    console.log('World');
+  }
+});

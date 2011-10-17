@@ -7,6 +7,7 @@
     "type": "git",
     "url": "git://github.com/mklabs/pkgrc.git"
   },
+  "main": "./lib/completion",
   "bin": "./bin/pkgrc",
   "engines": {
     "node": "> 0.4"

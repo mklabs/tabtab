@@ -1,13 +1,12 @@
-#!/bin/bash
-###-begin-pkgrc-completion-###
+
+###-begin-{pkgname}-completion-###
 ### credits to npm, this file is coming directly from isaacs/npm repo
 #
 # Just testing for now. (trying to learn this cool stuff)
 #
 # npm command completion script
 #
-# Installation: pkgrc completion >> ~/.bashrc  (or ~/.zshrc)
-# Or, maybe: pkgrc completion > /usr/local/etc/bash_completion.d/npm
+# Installation: {pkgname} completion >> ~/.bashrc  (or ~/.zshrc)
 #
 
 COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
@@ -15,18 +14,18 @@ COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
 export COMP_WORDBREAKS
 
 if complete &>/dev/null; then
-  _npm_completion () {
+  _{pkgname}_completion () {
     local si="$IFS"
     IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
                            COMP_LINE="$COMP_LINE" \
                            COMP_POINT="$COMP_POINT" \
-                           pkgrc completion -- "${COMP_WORDS[@]}" \
+                           {pkgname} completion -- "${COMP_WORDS[@]}" \
                            2>/dev/null)) || return $?
     IFS="$si"
   }
-  complete -F _npm_completion pkgrc
+  complete -F _{pkgname}_completion {pkgname}
 elif compctl &>/dev/null; then
-  _npm_completion () {
+  _{pkgname}_completion () {
     local cword line point words si
     read -Ac words
     read -cn cword
@@ -37,10 +36,11 @@ elif compctl &>/dev/null; then
     IFS=$'\n' reply=($(COMP_CWORD="$cword" \
                        COMP_LINE="$line" \
                        COMP_POINT="$point" \
-                       pkgrc completion -- "${words[@]}" \
+                       {pkgname} completion -- "${words[@]}" \
                        2>/dev/null)) || return $?
     IFS="$si"
   }
-  compctl -K _npm_completion pkgrc
+  compctl -K _{pkgname}_completion {pkgname}
 fi
-###-end-npm-completion-###
+###-end-{pkgname}-completion-###
+
