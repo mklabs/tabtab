@@ -32,4 +32,4 @@ var nopt = require('nopt')
 exports.opts = knownOpts
 exports.alias = shortHands
 
-console.log("parsed =\n"+ require("util").inspect(parsed, false, 2, true))
+// console.log("parsed =\n"+ require("util").inspect(parsed, false, 2, true))

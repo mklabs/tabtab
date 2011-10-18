@@ -3,6 +3,18 @@ var completion = require('../lib/completion');
 
 // this file is mainly just an example of usage
 
+// test with nopt options
+var noptions = require('../examples/nopt/nopt'),
+  opts = Object.keys(noptions.opts),
+  alias = Object.keys(noptions.alias),
+  all = opts.concat(alias);
+
+// test with commander options
+var program = require('../examples/commander/pizza'),
+  short = program.options.map(function(opt) { return opt.short; })
+  long = program.options.map(function(opt) { return opt.long; }),
+  commanderAll = short.concat(long);
+
 // pass the module name, will change to module
 // reference + dir walk to find a package.json
 completion.complete('pkgrc', function(err, o) {
@@ -18,14 +30,48 @@ completion.complete('pkgrc', function(err, o) {
   // Setting completion output is simply a matter of writing to the console
   //
 
-  console.log(o.line);
-  console.log(o.partial);
-  console.log(o.words);
-  console.log(o.point);
-  console.log(o.last);
-  console.log(o.lastPartial);
+  // console.log(o.line);
+  // console.log(o.partial);
+  // console.log(o.words);
+  // console.log(o.point);
+  // console.log(o.last);
+  // console.log(o.lastPartial);
 
-  if(o.partial === 'hello') {
-    console.log('World');
+  if(o.last === 'hello') {
+    return console.log('World');
   }
+
+  if(o.last === 'js') {
+    return console.log('javascript');
+  }
+
+  // basic config - and -- catch up
+  if(o.last === '-' && o.prev !== 'commander') {
+    return log(alias, '-');
+  }
+
+  if(o.last === '--' && o.prev !== 'commander') {
+    return log(opts, '--');
+  }
+
+  if(o.prev === 'config' || o.last === 'config') {
+    return log(all);
+  }
+
+  if(o.prev === 'commander') {
+    if(o.last === '--') return log(long);
+    return log(commanderAll);
+  }
+
+
+  console.log('line:' + o.line);
+  console.log('last:' + o.last);
+  console.log('prev: ' + o.prev);
 });
+
+function log(arr, prefix) {
+  prefix = prefix || '';
+  arr.forEach(function(v) {
+    console.log(prefix + v);
+  });
+}
