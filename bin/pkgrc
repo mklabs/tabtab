@@ -15,6 +15,18 @@ var program = require('../examples/commander/pizza'),
   long = program.options.map(function(opt) { return opt.long.replace(/-/g, ''); }),
   commanderAll = short.concat(long);
 
+// test with optimist options, this one is a little bit harder.
+// no easy way to get optimist's options, other than parsing the showHelp
+var optimist = require('../examples/optimist/usage-options'),
+  optimistFlags = parseOut(optimist.help()),
+  optimistShorts = optimistFlags.shorts.map(function(it) { return it.replace(/-/g, ''); }),
+  optimistLongs = optimistFlags.longs.map(function(it) { return it.replace(/-/g, ''); }),
+  optimistAll = optimistShorts.concat(optimistLongs);
+
+// completion for cake script: will be basically the same as optimist's, but
+// without the API to get the cake tasks output (eg. calling cake without tasks)
+//
+// will probably have to spawn process, parse stdout and automcomplete on this.
 
 // pass the module name, will change to module
 // reference + dir walk to find a package.json
@@ -46,6 +58,18 @@ completion.complete('pkgrc', function(err, o) {
     return console.log('javascript');
   }
 
+  if(o.prev === 'optimist') {
+    if(/^--\w?/.test(o.last)) return log(optimistLongs, o, '--');
+    if(/^-\w?/.test(o.last)) return log(optimistShorts, o, '-');
+    return log(optimistAll, o);
+  }
+
+  if(o.prev === 'commander') {
+    if(/^--\w?/.test(o.last)) return log(long, o, '--');
+    if(/^-\w?/.test(o.last)) return log(short, o, '-');
+    return log(commanderAll, o);
+  }
+
   // basic config - and -- catch up
   if(/^--\w?/.test(o.last) && o.prev !== 'commander') {
     return log(opts, o, '--');
@@ -59,13 +83,7 @@ completion.complete('pkgrc', function(err, o) {
     return log(all, o);
   }
 
-  if(o.prev === 'commander') {
-    if(/^--\w?/.test(o.last)) return log(long, o, '--');
-    if(/^-\w?/.test(o.last)) return log(short, o, '-');
-    return log(commanderAll, o);
-  }
-
-  return log('hello js config commander'.split(' '), o);
+  return log('hello js config commander optimist'.split(' '), o);
 });
 
 function log(arr, o, prefix) {
@@ -77,8 +95,27 @@ function log(arr, o, prefix) {
 }
 
 function abbrev(o) { return function(it) {
-  // console.log('f:' +  o.last);
-  // console.log('f: ' + o.last, it.match(o.last.replace(/-/g, '')));
-  // rreturn o.last.replace(/-/g, '').test(new RegExp(it));
   return new RegExp('^' + o.last.replace(/-/g, '')).test(it);
 }}
+
+// Parse a help output, especially usefull for
+// cli tool that don't provide an easy way to get configured
+// options in their API. Namely the case of optimist. Handy for cake
+// files too.
+//
+// It basically parse the help output, and return an object
+// mapping each -short and --long options it might find.
+//
+function parseOut(str) {
+  var shorts = str.match(/\s-\w+/g);
+  var longs = str.match(/\s--\w+/g);
+
+  return {
+    shorts: shorts.map(trim),
+    longs: longs.map(trim)
+  };
+}
+
+function trim (s) {
+  return s.trim();
+}
