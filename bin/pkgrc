@@ -19,14 +19,18 @@ var program = require('../examples/commander/pizza'),
 // no easy way to get optimist's options, other than parsing the showHelp
 var optimist = require('../examples/optimist/usage-options'),
   optimistFlags = parseOut(optimist.help()),
-  optimistShorts = optimistFlags.shorts.map(function(it) { return it.replace(/-/g, ''); }),
-  optimistLongs = optimistFlags.longs.map(function(it) { return it.replace(/-/g, ''); }),
+  optimistShorts = optimistFlags.shorts,
+  optimistLongs = optimistFlags.longs,
   optimistAll = optimistShorts.concat(optimistLongs);
 
 // completion for cake script: will be basically the same as optimist's, but
 // without the API to get the cake tasks output (eg. calling cake without tasks)
 //
 // will probably have to spawn process, parse stdout and automcomplete on this.
+var exec = require('child_process').exec,
+  path = require('path'),
+  // cakefile = path.join(process.env.HOME, 'mklabs', 'cakes', 'h5bp');
+  cakefile = path.join(__dirname, '..', 'examples', 'cake');
 
 // pass the module name, will change to module
 // reference + dir walk to find a package.json
@@ -70,6 +74,19 @@ completion.complete('pkgrc', function(err, o) {
     return log(commanderAll, o);
   }
 
+  if(o.prev === 'cake') {
+    // messy doing this here, just to test things out
+    return exec('cake', { cwd: cakefile }, function(err, stdout, stderr) {
+      if(err) return;
+      var parsed = parseOut(stdout),
+        tasks = parseTasks(stdout);
+      if(/^--\w?/.test(o.last)) return log(parsed.longs, o, '--');
+      if(/^-\w?/.test(o.last)) return log(parsed.shorts, o, '-');
+      log(tasks, o);
+    });
+  }
+
+
   // basic config - and -- catch up
   if(/^--\w?/.test(o.last) && o.prev !== 'commander') {
     return log(opts, o, '--');
@@ -83,7 +100,8 @@ completion.complete('pkgrc', function(err, o) {
     return log(all, o);
   }
 
-  return log('hello js config commander optimist'.split(' '), o);
+
+  return log('hello js config commander optimist cake'.split(' '), o);
 });
 
 function log(arr, o, prefix) {
@@ -111,11 +129,23 @@ function parseOut(str) {
   var longs = str.match(/\s--\w+/g);
 
   return {
-    shorts: shorts.map(trim),
-    longs: longs.map(trim)
+    shorts: shorts.map(trim).map(cleanPrefix),
+    longs: longs.map(trim).map(cleanPrefix)
   };
+}
+
+// specific to cake case
+function parseTasks(str) {
+  var tasks = str.match(/^cake\s[^#]+/gm) || [];
+  return tasks.map(trim).map(function(s) {
+    return s.replace('cake ', '');
+  });
 }
 
 function trim (s) {
   return s.trim();
+}
+
+function cleanPrefix(s) {
+  return s.replace(/-/g, '');
 }
