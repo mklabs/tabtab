@@ -11,9 +11,10 @@ var noptions = require('../examples/nopt/nopt'),
 
 // test with commander options
 var program = require('../examples/commander/pizza'),
-  short = program.options.map(function(opt) { return opt.short; })
-  long = program.options.map(function(opt) { return opt.long; }),
+  short = program.options.map(function(opt) { return opt.short.replace(/-/g, ''); }),
+  long = program.options.map(function(opt) { return opt.long.replace(/-/g, ''); }),
   commanderAll = short.concat(long);
+
 
 // pass the module name, will change to module
 // reference + dir walk to find a package.json
@@ -46,32 +47,38 @@ completion.complete('pkgrc', function(err, o) {
   }
 
   // basic config - and -- catch up
-  if(o.last === '-' && o.prev !== 'commander') {
-    return log(alias, '-');
+  if(/^--\w?/.test(o.last) && o.prev !== 'commander') {
+    return log(opts, o, '--');
   }
 
-  if(o.last === '--' && o.prev !== 'commander') {
-    return log(opts, '--');
+  if(/^-\w?/.test(o.last) && o.prev !== 'commander') {
+    return log(alias, o, '-');
   }
 
   if(o.prev === 'config' || o.last === 'config') {
-    return log(all);
+    return log(all, o);
   }
 
   if(o.prev === 'commander') {
-    if(o.last === '--') return log(long);
-    return log(commanderAll);
+    if(/^--\w?/.test(o.last)) return log(long, o, '--');
+    if(/^-\w?/.test(o.last)) return log(short, o, '-');
+    return log(commanderAll, o);
   }
 
-
-  console.log('line:' + o.line);
-  console.log('last:' + o.last);
-  console.log('prev: ' + o.prev);
+  return log('hello js config commander'.split(' '), o);
 });
 
-function log(arr, prefix) {
+function log(arr, o, prefix) {
   prefix = prefix || '';
-  arr.forEach(function(v) {
+  arr = Array.isArray(arr) ? arr : [arr];
+  arr.filter(abbrev(o)).forEach(function(v) {
     console.log(prefix + v);
   });
 }
+
+function abbrev(o) { return function(it) {
+  // console.log('f:' +  o.last);
+  // console.log('f: ' + o.last, it.match(o.last.replace(/-/g, '')));
+  // rreturn o.last.replace(/-/g, '').test(new RegExp(it));
+  return new RegExp('^' + o.last.replace(/-/g, '')).test(it);
+}}
