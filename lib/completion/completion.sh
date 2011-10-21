@@ -6,7 +6,7 @@
 #
 # npm command completion script
 #
-# Installation: {pkgname} completion >> ~/.bashrc  (or ~/.zshrc)
+# Installation: {completer} completion >> ~/.bashrc  (or ~/.zshrc)
 #
 
 COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
@@ -19,7 +19,7 @@ if complete &>/dev/null; then
     IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
                            COMP_LINE="$COMP_LINE" \
                            COMP_POINT="$COMP_POINT" \
-                           {pkgname} completion -- "${COMP_WORDS[@]}" \
+                           {completer} completion -- "${COMP_WORDS[@]}" \
                            2>/dev/null)) || return $?
     IFS="$si"
   }
@@ -36,7 +36,7 @@ elif compctl &>/dev/null; then
     IFS=$'\n' reply=($(COMP_CWORD="$cword" \
                        COMP_LINE="$line" \
                        COMP_POINT="$point" \
-                       {pkgname} completion -- "${words[@]}" \
+                       {completer} completion -- "${words[@]}" \
                        2>/dev/null)) || return $?
     IFS="$si"
   }

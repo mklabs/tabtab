@@ -8,7 +8,9 @@
     "url": "git://github.com/mklabs/pkgrc.git"
   },
   "main": "./lib/completion",
-  "bin": "./bin/pkgrc",
+  "directories": {
+    "bin": "./bin"
+  },
   "engines": {
     "node": "> 0.4"
   },
