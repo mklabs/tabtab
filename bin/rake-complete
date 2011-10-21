@@ -4,9 +4,13 @@ var completion = require('../lib/completion'),
   path = require('path'),
   completer = path.basename(__filename);
 
+var parseTasks = completion.parseTasks,
+  parseOut = completion.parseOut,
+  log = completion.log;
+
 completion.complete('rake', completer, function(err, o) {
   if(err || !o) return;
-  
+
   var parsed, tasks;
 
   exec('rake -H', function(err, stdout, stderr) {
@@ -31,42 +35,4 @@ completion.complete('rake', completer, function(err, o) {
     log(tasks, o);
   }
 });
-
-function parseOut(str) {
-  var shorts = str.match(/\s-\w+/g);
-  var longs = str.match(/\s--\w+/g);
-
-  return {
-    shorts: shorts.map(trim).map(cleanPrefix),
-    longs: longs.map(trim).map(cleanPrefix)
-  };
-}
-
-// specific to cake case
-function parseTasks(str, prefix) {
-  var tasks = str.match(new RegExp('^' + prefix + '\\s[^#]+', 'gm')) || [];
-  return tasks.map(trim).map(function(s) {
-    return s.replace(prefix + ' ', '');
-  });
-}
-
-function log(arr, o, prefix) {
-  prefix = prefix || '';
-  arr = Array.isArray(arr) ? arr : [arr];
-  arr.filter(abbrev(o)).forEach(function(v) {
-    console.log(prefix + v);
-  });
-}
-
-function trim (s) {
-  return s.trim();
-}
-
-function cleanPrefix(s) {
-  return s.replace(/-/g, '');
-}
-
-function abbrev(o) { return function(it) {
-  return new RegExp('^' + o.last.replace(/-/g, '')).test(it);
-}}
 

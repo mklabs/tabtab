@@ -3,56 +3,21 @@ var completion = require('../lib/completion'),
   exec = require('child_process').exec,
   path = require('path');
 
+var parseTasks = completion.parseTasks,
+  parseOut = completion.parseOut,
+  log = completion.log;
+
 completion.complete('cake', 'cake-complete', function(err, o) {
   if(err || !o) return;
 
   return exec('cake', function(err, stdout, stderr) {
-    if(err) return console.log(err.message);
+    if(err) return;
     var parsed = parseOut(stdout),
-      tasks = parseTasks(stdout);
+      tasks = parseTasks(stdout, 'cake');
 
     if(/^--\w?/.test(o.last)) return log(parsed.longs, o, '--');
     if(/^-\w?/.test(o.last)) return log(parsed.shorts, o, '-');
     log(tasks, o);
   });
-
 });
-
-function parseOut(str) {
-  var shorts = str.match(/\s-\w+/g);
-  var longs = str.match(/\s--\w+/g);
-
-  return {
-    shorts: shorts.map(trim).map(cleanPrefix),
-    longs: longs.map(trim).map(cleanPrefix)
-  };
-}
-
-// specific to cake case
-function parseTasks(str) {
-  var tasks = str.match(/^cake\s[^#]+/gm) || [];
-  return tasks.map(trim).map(function(s) {
-    return s.replace('cake ', '');
-  });
-}
-
-function log(arr, o, prefix) {
-  prefix = prefix || '';
-  arr = Array.isArray(arr) ? arr : [arr];
-  arr.filter(abbrev(o)).forEach(function(v) {
-    console.log(prefix + v);
-  });
-}
-
-function trim (s) {
-  return s.trim();
-}
-
-function cleanPrefix(s) {
-  return s.replace(/-/g, '');
-}
-
-function abbrev(o) { return function(it) {
-  return new RegExp('^' + o.last.replace(/-/g, '')).test(it);
-}}
 
