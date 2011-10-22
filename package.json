@@ -14,7 +14,9 @@
   "engines": {
     "node": "> 0.4"
   },
-  "dependencies": {},
+  "dependencies": {
+    "ronn": "~0.3.7"
+  },
   "devDependencies": {
     "nopt": "~1.0.10",
     "commander": "~0.2.0",
