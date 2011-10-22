@@ -18,3 +18,14 @@ completion.complete('vagrant', completer, function(err, o) {
   });
 });
 
+if(completion.isComplete()) return;
+
+console.log([
+  'vagrant-complete called outside of a completion context.',
+  '» You may want to setup the completion in your ~/.bashrc or ~/.zshrc file, if not already.',
+  '',
+  '   vagrant-complete completion >> ~/.bashrc',
+  'Or',
+  '   vagrant-complete completion >> ~/.zshrc'
+].join('\n'));
+
