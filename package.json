@@ -11,6 +11,9 @@
   "directories": {
     "bin": "./bin"
   },
+  "scripts": {
+    "test": "vows test/*.js --spec --isolate"
+  },
   "engines": {
     "node": "> 0.4"
   },
@@ -18,6 +21,7 @@
     "ronn": "~0.3.7"
   },
   "devDependencies": {
+    "vows": "~0.5.12",
     "nopt": "~1.0.10",
     "commander": "~0.2.0",
     "optimist": "~0.2.6"
