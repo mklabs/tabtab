@@ -23,7 +23,7 @@ if complete &>/dev/null; then
                            2>/dev/null)) || return $?
     IFS="$si"
   }
-  complete -F _{pkgname}_completion {pkgname}
+  complete -F _{pkgname}_completion -o default {pkgname}
 elif compctl &>/dev/null; then
   _{pkgname}_completion () {
     local cword line point words si
@@ -40,7 +40,7 @@ elif compctl &>/dev/null; then
                        2>/dev/null)) || return $?
     IFS="$si"
   }
-  compctl -K _{pkgname}_completion {pkgname}
+  compctl -K _{pkgname}_completion -f {pkgname}
 fi
 ###-end-{pkgname}-completion-###
 
