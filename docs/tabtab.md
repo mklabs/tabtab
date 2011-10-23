@@ -1,4 +1,5 @@
-a npm package to ease the process of doing custom command line tab completion on any commands, for both bash/zsh shell.
+a npm package to do some custom command line`<tab><tab>` completion for any system command, using the node api and JS to provide your own completion, for both bash/zsh shell.
+
 
 Made possible using the same technique as npm (whose completion is quite awesome) relying on a bash/zsh completion script bridge to a node script.
 
@@ -6,12 +7,8 @@ If you'd like to implement some completion for your own nodejs cli app,
 or maybe any other command on your system (think not necessaraly an npm
 package) using regular JavaScript instead of bash scripting, this repository can help you.
 
-Comes with built-in completion examples for:
-
-* rake: tasks/options
-* cake: tasks/options
-* vagrant: 
-* ...
+Comes with built-in completion, mainly as examples, for rake
+(tasks/options), cake (tasks/options), vagrant (tasks) and play (tasks).
 
 And a more generally purpose example doing completion with some of the
 most robust and well-known options parsing and cli modules:
@@ -42,11 +39,11 @@ Or
 
 ### setting up a new completion
 
-To install follow the installation instructions in the `completer completion` 
+To install follow the installation instructions in the `completer completion`
 output or `completer`. A completer is one of the script in `bin/`, that
 gets linked to your $PATH by npm during global install or link.
 
-You simply need to redirect the output of the command in your 
+You simply need to redirect the output of the command in your
 ~/.basrc or ~/.zshrc file. Example for completing tasks and options for
 cake
 
@@ -60,6 +57,36 @@ Then, make sure to open a new shell session to make sure the
 
 npm completion is pretty amazing and would allow you to discover some
 options and commands you might not know about.
+
+#### install/uninstall
+
+You can instead make use of install/uninstall completion command, here
+is the output of
+
+    $ rake-complete
+    rake-complete called outside of a completion context.
+    » You may want to setup the completion in your ~/.bashrc or ~/.zshrc file, if not already.
+
+       rake-complete completion >> ~/.bashrc
+    Or
+       rake-complete completion >> ~/.zshrc
+
+    Or you may use the install command
+       rake-complete completion install
+
+    Simply run this command to uninstall
+       rake-complete completion uninstall
+
+The install command does pretty much the same as `rake-complete
+completion >> ~/.bashrc` and edit ~/.bashrc or ~/.zshrc depending on the
+value of `process.env.SHELL`. It also ensures that the script is not
+already installed.
+
+The uninstall command reverts the install.
+
+### help
+
+Type `tabtab help` to get the content of this readme as manpage.
 
 ### using it in node cli app
 
@@ -111,14 +138,15 @@ Installing the completion for your cli app is done very much like npm:
 
     pkgname completion >> ~/.bashrc (or ~/.zshrc)
 
-### installing examples completion
+Or
 
-The `bin` folders includes some completion example for cake, rake and
-vagrant.
+    pkgname completion install
+
+To desinstall:
+
+    pkgname completion uninstall
 
 ## API
-
-- After you put it in an accessible place, run it with the `--install` option. This will install a series of bash scripts in the `/usr/local/lib/node_scripts/` directory. Optionally, you can then add a script to your CLI program to ensure that it has been `installed`.
 
 ### complete
 
@@ -153,7 +181,7 @@ completion.log(['list', 'of', 'values'], data, prefix);
 ### parseOut
 
 Helper to return the list of short and long options, parsed from the
-usual `--help` output of a command (cake/rake -H, vagrant, commander -h, 
+usual `--help` output of a command (cake/rake -H, vagrant, commander -h,
 optimist.help(), ...)
 
 ```javascript
@@ -192,11 +220,11 @@ exec('cake', function(err, stdout, stderr) {
 
 ## Credits
 
-npm does pretty amazing stuff with its completion feature. Bash and 
+npm does pretty amazing stuff with its completion feature. Bash and
 zsh shells allow command completion, typically bound to the TAB key,
 which allow you to complete the names of commands stored upon your PATH.
 Usually these functions means bash scripting, and in the case of npm, it
-is partially true. 
+is partially true.
 
 There is a special `npm completion` command you may want to look around, it not already.
 

@@ -7,7 +7,7 @@ var completion = require('../lib/completion'),
 // this file is mainly just an example of usage
 
 if(argv[0] === 'help') {
-  return help(argv[1] || path.join(__dirname, '../docs/pkgrc.md'));
+  return help(argv[1] || path.join(__dirname, '../docs/tabtab.md'));
 }
 
 // test with nopt options
