@@ -1,7 +1,14 @@
 #!/usr/bin/env node
-var completion = require('../lib/completion');
+var completion = require('../lib/completion'),
+  help = require('../lib/docs').help
+  path = require('path'),
+  argv = process.argv.slice(2);
 
 // this file is mainly just an example of usage
+
+if(argv[0] === 'help') {
+  return help(argv[1] || path.join(__dirname, '../docs/pkgrc.md'));
+}
 
 // test with nopt options
 var noptions = require('../examples/nopt/nopt'),
