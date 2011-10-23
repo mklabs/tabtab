@@ -28,6 +28,12 @@ console.log([
   '» You may want to setup the completion in your ~/.bashrc or ~/.zshrc file, if not already.',
   '',
   '   cake-complete completion >> ~/.bashrc',
-  'Or',
-  '   cake-complete completion >> ~/.zshrc'
+  'Or, using zsh:',
+  '   cake-complete completion >> ~/.zshrc',
+  '',
+  'Or you may use the install command:',
+  '   cake-complete completion install',
+  '',
+  'Simply run this command to uninstall',
+  '   cake-complete completion uninstall'
 ].join('\n'));

@@ -44,5 +44,11 @@ console.log([
   '',
   '   rake-complete completion >> ~/.bashrc',
   'Or',
-  '   rake-complete completion >> ~/.zshrc'
+  '   rake-complete completion >> ~/.zshrc',
+  '',
+  'Or you may use the install command:',
+  '   rake-complete completion install',
+  '',
+  'Simply run this command to uninstall',
+  '   rake-complete completion uninstall'
 ].join('\n'));

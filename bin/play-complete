@@ -27,5 +27,11 @@ console.log([
   '',
   '   play-complete completion >> ~/.bashrc',
   'Or',
-  '   play-complete completion >> ~/.zshrc'
+  '   play-complete completion >> ~/.zshrc',
+  '',
+  'Or you may use the install command:',
+  '   play-complete completion install',
+  '',
+  'Simply run this command to uninstall',
+  '   play-complete completion uninstall'
 ].join('\n'));
