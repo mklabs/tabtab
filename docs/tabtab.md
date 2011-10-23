@@ -29,15 +29,15 @@ completed.
 
 Latest released version (when it'll get released)
 
-    npm install pkgrc -g
+    npm install tabtab -g
 
 Latest dev code:
 
-    npm install https://github.com/mklabs/pkgrc/tarball/master -g
+    npm install https://github.com/mklabs/node-tabtab/tarball/master -g
 
 Or
-    git clone https://github.com/mklabs/pkgrc.git
-    cd pkgrc
+    git clone https://github.com/mklabs/node-tabtab.git
+    cd tabtab
     npm link
 
 ### setting up a new completion

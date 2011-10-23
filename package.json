@@ -1,11 +1,11 @@
 {
   "author": "mklabs",
-  "name": "pkgrc",
+  "name": "tabtab",
   "description": "a package configuration/options parsing/documentation/completion tool.",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mklabs/pkgrc.git"
+    "url": "git://github.com/mklabs/node-tabtab.git"
   },
   "main": "./lib/completion",
   "directories": {
