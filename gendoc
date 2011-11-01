@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# npm install https://github.com/mklabs/cakes/tarball/master
+# ! [ -d tasks ] && mkdir tasks
+# ! [ -e tasks/docs.js ] && wget -O tasks/docs.js --no-check-certificate https://raw.github.com/gist/b80f026edbca9419dd48/dbf54fb229c734ebcb7a03057be61e1454c57828/docs.js
+# ! [ -e tasks/index.html ] && wget -O tasks/index.html --no-check-certificate https://raw.github.com/gist/b80f026edbca9419dd48/dbf54fb229c734ebcb7a03057be61e1454c57828/index.html
+
+# npm install mkdirp markdown findit mustache
+# ./node_modules/.bin/h5bp-cake init
+# ./node_modules/.bin/h5bp-cake intro
+
+npm install https://gist.github.com/gists/b80f026edbca9419dd48/download
+
+echo Ok.. Now install tasks/docs.js deps
+npm install mkdirp markdown findit mustache
+
+echo Install Done, Use it:
+echo ./node_modules/cakes-docs/node_modules/.bin/h5bp-cake init
+echo ./node_modules/cakes-docs/node_modules/.bin/h5bp-cake gh-pages
+
+./node_modules/cakes-docs/node_modules/.bin/h5bp-cake init
+./node_modules/cakes-docs/node_modules/.bin/h5bp-cake gh-pages
