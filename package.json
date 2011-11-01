@@ -9,7 +9,8 @@
   },
   "main": "./lib/completion",
   "directories": {
-    "bin": "./bin"
+    "lib": "./lib",
+    "doc": "./"
   },
   "scripts": {
     "test": "vows test/*.js --spec --isolate"
@@ -18,12 +19,16 @@
     "node": "> 0.4"
   },
   "dependencies": {
-    "ronn": "~0.3.7"
+    "ronn": "~0.3.7",
+    "docco": "~0.3.0"
   },
   "devDependencies": {
     "vows": "~0.5.12",
     "nopt": "~1.0.10",
     "commander": "~0.2.0",
     "optimist": "~0.2.6"
+  },
+  "config": {
+    "doc": "./docs/completion.html"
   }
 }
