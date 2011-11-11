@@ -1,7 +1,7 @@
 {
   "author": "mklabs",
   "name": "tabtab",
-  "description": "a package configuration/options parsing/documentation/completion tool.",
+  "description": "tab completion helpers, for node cli programs (and others). Inspired by npm completion.",
   "version": "0.0.1",
   "repository": {
     "type": "git",
@@ -19,8 +19,7 @@
     "node": "> 0.4"
   },
   "dependencies": {
-    "ronn": "~0.3.7",
-    "docco": "~0.3.0"
+    "ronn": "~0.3.7"
   },
   "devDependencies": {
     "vows": "~0.5.12",
