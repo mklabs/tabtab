@@ -4,12 +4,17 @@
   "description": "tab completion helpers, for node cli programs (and others). Inspired by npm completion.",
   "version": "0.0.1",
   "main": "./lib/completion",
-  "engines": { "node": "> 0.4" },
+  "engines": {
+    "node": "> 0.4"
+  },
   "scripts": {
-    "test": "vows test/*.js --spec --isolate"
+    "test": "node node_modules/vows/bin/vows test/*.js --spec --isolate"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/mklabs/node-tabtab.git"
+  },
+  "devDependencies": {
+    "vows": "~0.6.1"
   }
 }
