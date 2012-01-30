@@ -7,7 +7,7 @@ assert = require('assert'),
 completion = require('../lib/completion'),
 argv = process.argv.slice(0, 2);
 
-var completionSh = fs.readFileSync(path.join(__dirname, '..', 'lib', 'completion', 'completion.sh'), 'utf8')
+var completionSh = fs.readFileSync(path.join(__dirname, '../lib/completion.sh'), 'utf8')
   .replace(/\{pkgname\}/g, 'foo')
   .replace(/{completer}/g, 'foo');
 

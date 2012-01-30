@@ -3,31 +3,13 @@
   "name": "tabtab",
   "description": "tab completion helpers, for node cli programs (and others). Inspired by npm completion.",
   "version": "0.0.1",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/mklabs/node-tabtab.git"
-  },
   "main": "./lib/completion",
-  "directories": {
-    "lib": "./lib",
-    "doc": "./"
-  },
+  "engines": { "node": "> 0.4" },
   "scripts": {
     "test": "vows test/*.js --spec --isolate"
   },
-  "engines": {
-    "node": "> 0.4"
-  },
-  "dependencies": {
-    "ronn": "~0.3.7"
-  },
-  "devDependencies": {
-    "vows": "~0.5.12",
-    "nopt": "~1.0.10",
-    "commander": "~0.2.0",
-    "optimist": "~0.2.6"
-  },
-  "config": {
-    "doc": "./docs/completion.html"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mklabs/node-tabtab.git"
   }
 }
