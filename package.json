@@ -1,8 +1,8 @@
 {
   "author": "mklabs",
   "name": "tabtab",
-  "description": "tab completion helpers, for node cli programs (and others). Inspired by npm completion.",
-  "version": "0.0.1",
+  "description": "tab completion helpers, for node cli programs. Inspired by npm completion.",
+  "version": "0.0.2",
   "main": "./lib/completion",
   "engines": {
     "node": "> 0.4"
