@@ -13,19 +13,30 @@ COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
 COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
 export COMP_WORDBREAKS
 
-if complete &>/dev/null; then
-  _{pkgname}_completion () {
+if type complete &>/dev/null; then
+  _npm_completion () {
     local si="$IFS"
     IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
                            COMP_LINE="$COMP_LINE" \
                            COMP_POINT="$COMP_POINT" \
-                           {completer} completion -- "${COMP_WORDS[@]}" \
+                           npm completion -- "${COMP_WORDS[@]}" \
                            2>/dev/null)) || return $?
     IFS="$si"
   }
-  complete -F _{pkgname}_completion -o default {pkgname}
-elif compctl &>/dev/null; then
-  _{pkgname}_completion () {
+  complete -F _npm_completion npm
+elif type compdef &>/dev/null; then
+  _npm_completion() {
+    si=$IFS
+    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+                 COMP_LINE=$BUFFER \
+                 COMP_POINT=0 \
+                 npm completion -- "${words[@]}" \
+                 2>/dev/null)
+    IFS=$si
+  }
+  compdef _npm_completion npm
+elif type compctl &>/dev/null; then
+  _npm_completion () {
     local cword line point words si
     read -Ac words
     read -cn cword
@@ -36,11 +47,11 @@ elif compctl &>/dev/null; then
     IFS=$'\n' reply=($(COMP_CWORD="$cword" \
                        COMP_LINE="$line" \
                        COMP_POINT="$point" \
-                       {completer} completion -- "${words[@]}" \
+                       npm completion -- "${words[@]}" \
                        2>/dev/null)) || return $?
     IFS="$si"
   }
-  compctl -K _{pkgname}_completion -f {pkgname}
+  compctl -K _npm_completion npm
 fi
 ###-end-{pkgname}-completion-###
 
