@@ -1,3 +1,5 @@
+# Copyright (c) npm, Inc. and Contributors
+# All rights reserved.
 
 ###-begin-{pkgname}-completion-###
 ### credits to npm, this file is coming directly from isaacs/npm repo
