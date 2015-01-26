@@ -15,7 +15,7 @@
     "url": "git://github.com/mklabs/node-tabtab.git"
   },
   "devDependencies": {
-    "vows": "~0.6.1"
+    "vows": "~0.8.1"
   },
   "licenses": [
     {
