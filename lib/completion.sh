@@ -45,3 +45,4 @@ elif type compctl &>/dev/null; then
   compctl -K _{pkgname}_completion {pkgname}
 fi
 ###-end-{pkgname}-completion-###
+
