@@ -15,7 +15,7 @@ COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
 COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
 export COMP_WORDBREAKS
 
-if complete &>/dev/null; then
+if type complete &>/dev/null; then
   _{pkgname}_completion () {
     local si="$IFS"
     IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
@@ -25,8 +25,8 @@ if complete &>/dev/null; then
                            2>/dev/null)) || return $?
     IFS="$si"
   }
-  complete -F _{pkgname}_completion -o default {pkgname}
-elif compctl &>/dev/null; then
+  complete -F _{pkgname}_completion {pkgname}
+elif type compctl &>/dev/null; then
   _{pkgname}_completion () {
     local cword line point words si
     read -Ac words
@@ -38,11 +38,10 @@ elif compctl &>/dev/null; then
     IFS=$'\n' reply=($(COMP_CWORD="$cword" \
                        COMP_LINE="$line" \
                        COMP_POINT="$point" \
-                       {completer} completion -- "${words[@]}" \
+                       {pkgname} completion -- "${words[@]}" \
                        2>/dev/null)) || return $?
     IFS="$si"
   }
-  compctl -K _{pkgname}_completion -f {pkgname}
+  compctl -K _{pkgname}_completion {pkgname}
 fi
 ###-end-{pkgname}-completion-###
-
