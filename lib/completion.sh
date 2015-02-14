@@ -38,7 +38,7 @@ elif type compctl &>/dev/null; then
     IFS=$'\n' reply=($(COMP_CWORD="$cword" \
                        COMP_LINE="$line" \
                        COMP_POINT="$point" \
-                       {pkgname} completion -- "${words[@]}" \
+                       {completer} completion -- "${words[@]}" \
                        2>/dev/null)) || return $?
     IFS="$si"
   }
