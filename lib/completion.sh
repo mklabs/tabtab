@@ -42,7 +42,9 @@ elif type compctl &>/dev/null; then
                        2>/dev/null)) || return $?
     IFS="$si"
   }
-  compctl -K _{pkgname}_completion {pkgname}
+  # if the completer function returns on matches, default
+  # to filesystem matching
+  compctl -K _{pkgname}_completion + -f + {pkgname}
 fi
 ###-end-{pkgname}-completion-###
 
