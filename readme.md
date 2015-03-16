@@ -141,7 +141,7 @@ of commands in your $PATH.  Usually these functions means bash
 scripting, and in the case of npm, it is partially true.
 
 There is a special `npm completion` command you may want to look around,
-it not already.
+if not already.
 
     npm completion
 
