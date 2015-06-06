@@ -25,22 +25,24 @@ Latest dev code:
 
 You can add completion pretty easily in your node cli script:
 
-    #!/usr/bin/env node
-    var tabtab = require('tabtab');
+```js
+#!/usr/bin/env node
+var tabtab = require('tabtab');
 
-    if(process.argv.slice(2)[0] === 'completion') return tabtab.complete('pkgname', function(err, data) {
-      // simply return here if there's an error or data not provided.
-      // stderr not showing on completions
-      if(err || !data) return;
+if(process.argv.slice(2)[0] === 'completion') return tabtab.complete('pkgname', function(err, data) {
+  // simply return here if there's an error or data not provided.
+  // stderr not showing on completions
+  if(err || !data) return;
 
-      if(/^--\w?/.test(data.last)) return tabtab.log(['help', 'version'], data, '--');
-      if(/^-\w?/.test(data.last)) return tabtab.log(['n', 'o', 'd', 'e'], data, '-');
+  if(/^--\w?/.test(data.last)) return tabtab.log(['help', 'version'], data, '--');
+  if(/^-\w?/.test(data.last)) return tabtab.log(['n', 'o', 'd', 'e'], data, '-');
 
-      tabtab.log(['list', 'of', 'commands'], data);
-    });
+  tabtab.log(['list', 'of', 'commands'], data);
+});
 
-    // The rest of your script
-    ...
+// The rest of your script
+...
+```
 
 Simply replace `pkgname` by the name of your package. The complete
 callback get's called with data only in the context of a completion
@@ -60,7 +62,7 @@ completion:
 #### completion install
 
 Installing the completion for your cli app is done very much [like npm
-does](http://npmjs.org/doc/completion.html):
+does](https://docs.npmjs.com/cli/completion):
 
     . <(pkgname completion)
 
