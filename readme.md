@@ -15,15 +15,9 @@ Latest released version (when it'll get released)
 
     npm install tabtab
 
-Latest dev code:
-
-    npm install https://github.com/mklabs/node-tabtab/tarball/master
-
 ## Features
 
-- old
-
-## Todo
+> wip
 
 - Binary to manage and discover completion
 - Chainable API
@@ -38,10 +32,9 @@ You can add completion pretty easily in your node cli script:
 ```js
 var tab = require('tabtab');
 
-
 tab.on('complete', function(err, data, done) {
   // General handler
-  done(null, ['foo', bar']);
+  done(null, ['foo', 'bar']);
 });
 
 // yourbin command completion
