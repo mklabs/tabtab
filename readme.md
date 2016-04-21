@@ -31,14 +31,13 @@ You can add completion pretty easily in your node cli script:
 ```js
 var tab = require('tabtab')();
 
-tab.on('complete', function(data, done) {
+// General handler. Gets called on `foobar <tab>` and `foobar stuff ... <tab>`
+tab.on('foobar', function(data, done) {
   // General handler
   done(null, ['foo', 'bar']);
 });
 
-// yourbin command completion
-//
-// Ex. yourbin list
+// Specific handler. Gets called on `foobar list <tab>`
 tab.on('list', function(data, done) {
   done(null, ['file.js', 'file2.js']);
 });
