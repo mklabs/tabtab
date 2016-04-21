@@ -1,31 +1,46 @@
+###-begin-{pkgname}-completion-###
+
 # Copyright (c) npm, Inc. and Contributors
 # All rights reserved.
 
-###-begin-{pkgname}-completion-###
-### credits to npm, this file is coming directly from isaacs/npm repo
-#
-# Just testing for now. (trying to learn this cool stuff)
+# Credits to npm, this file is coming directly from isaacs/npm repo
 #
 # npm command completion script
 #
 # Installation: {completer} completion >> ~/.bashrc  (or ~/.zshrc)
+# Or, maybe: {completer} completion > /usr/local/etc/bash_completion.d/{completer}
 #
-
-COMP_WORDBREAKS=${COMP_WORDBREAKS/=/}
-COMP_WORDBREAKS=${COMP_WORDBREAKS/@/}
-export COMP_WORDBREAKS
 
 if type complete &>/dev/null; then
   _{pkgname}_completion () {
+    local words cword
+    if type _get_comp_words_by_ref &>/dev/null; then
+      _get_comp_words_by_ref -n = -n @ -w words -i cword
+    else
+      cword="$COMP_CWORD"
+      words=("${COMP_WORDS[@]}")
+    fi
+
     local si="$IFS"
-    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$COMP_CWORD" \
+    IFS=$'\n' COMPREPLY=($(COMP_CWORD="$cword" \
                            COMP_LINE="$COMP_LINE" \
                            COMP_POINT="$COMP_POINT" \
-                           {completer} completion -- "${COMP_WORDS[@]}" \
+                           {completer} completion -- "${words[@]}" \
                            2>/dev/null)) || return $?
     IFS="$si"
   }
-  complete -F _{pkgname}_completion {pkgname}
+  complete -o default -F _{pkgname}_completion {pkgname}
+elif type compdef &>/dev/null; then
+  _{pkgname}_completion() {
+    local si=$IFS
+    compadd -- $(COMP_CWORD=$((CURRENT-1)) \
+                 COMP_LINE=$BUFFER \
+                 COMP_POINT=0 \
+                 {completer} completion -- "${words[@]}" \
+                 2>/dev/null)
+    IFS=$si
+  }
+  compdef _{pkgname}_completion {pkgname}
 elif type compctl &>/dev/null; then
   _{pkgname}_completion () {
     local cword line point words si
@@ -42,9 +57,6 @@ elif type compctl &>/dev/null; then
                        2>/dev/null)) || return $?
     IFS="$si"
   }
-  # if the completer function returns on matches, default
-  # to filesystem matching
-  compctl -K _{pkgname}_completion + -f + {pkgname}
+  compctl -K _{pkgname}_completion {pkgname}
 fi
 ###-end-{pkgname}-completion-###
-

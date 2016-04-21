@@ -29,9 +29,9 @@ Latest released version (when it'll get released)
 You can add completion pretty easily in your node cli script:
 
 ```js
-var tab = require('tabtab');
+var tab = require('tabtab')();
 
-tab.on('complete', function(err, data, done) {
+tab.on('complete', function(data, done) {
   // General handler
   done(null, ['foo', 'bar']);
 });
@@ -39,7 +39,7 @@ tab.on('complete', function(err, data, done) {
 // yourbin command completion
 //
 // Ex. yourbin list
-tab.on('list', function(err, data, done) {
+tab.on('list', function(data, done) {
   done(null, ['file.js', 'file2.js']);
 });
 ```
