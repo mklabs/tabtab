@@ -20,8 +20,7 @@ Latest released version (when it'll get released)
 > wip
 
 - Binary to manage and discover completion
-- Chainable API
-- No API
+- Automatic completion from help output
 - `tabtab install` in package.json install script creates the completion file on user system
 - Automatic completion with package.json `completion|tabtab` property
 
@@ -111,41 +110,6 @@ This command lets you source the completion script to a particular place.
 Defaults is to use `/etc/bash_completion.d` dir if it exists, and fallback to
 ~/.bashrc or ~/.zshrc files.
 
-#### npm install script
-
-Using npm's install script, you can automatically install completion for your
-program whenever it gets globally installed.
-
-```json
-{
-  "scripts": {
-    "install": "tabtab install"
-  }
-}
-```
-
-On install, npm will execute the `tabtab install` command automatically in the
-context of your package.
-
-Ex.
-
-```json
-{
-  "name": "foobar",
-  "bin": "bin/foobar",
-  "scripts": {
-    "install": "tabtab install"
-  },
-  "dependencies": {
-    "tabtab": "^1.0.0"
-  }
-}
-```
-
-It will writes the output of `tabtab completion --name foobar` to
-`/etc/bash_completion.d/foobar` and enable completion for your program
-automatically whenever a user install your package.
-
 ### tabtab uninstall
 
     $ tabtab uninstall foobar
@@ -161,6 +125,43 @@ uninstall.
 - tabtab add
 - tabtab rm/remove
 
+## npm scripts
+
+Using npm's install/uninstall script, you can automatically manage completion
+for your program whenever it gets globally installed or removed.
+
+```json
+{
+  "scripts": {
+    "install": "tabtab install",
+    "uninstall": "tabtab uninstall"
+  }
+}
+```
+
+On install, npm will execute the `tabtab install` command automatically in the
+context of your package.
+
+Ex.
+
+```json
+{
+  "name": "foobar",
+  "bin": "bin/foobar",
+  "scripts": {
+    "install": "tabtab install",
+    "uninstall": "tabtab uninstall"
+  },
+  "dependencies": {
+    "tabtab": "^1.0.0"
+  }
+}
+```
+
+It will writes the output of `tabtab completion --name foobar` to
+`/etc/bash_completion.d/foobar` and enable completion for your program
+automatically whenever a user install your package, and undo the operation if
+removed.
 
 ## API
 

@@ -6,7 +6,9 @@ babel:
 
 lint:
 	eslint .
-	jscs .
+
+env:
+	@echo $(PATH)
 
 build: babel test lint
 

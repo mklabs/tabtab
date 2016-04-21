@@ -2,10 +2,10 @@
   "author": "mklabs",
   "name": "tabtab",
   "description": "tab completion helpers, for node cli programs. Inspired by npm completion.",
+  "bin": "bin/tabtab",
   "main": "index.js",
   "scripts": {
     "test": "bake test",
-    "prepublish": "bake babel",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "devDependencies": {
@@ -30,5 +30,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/mklabs/node-tabtab.git"
+  },
+  "dependencies": {
+    "debug": "^2.2.0",
+    "minimist": "^1.2.0",
+    "npmlog": "^2.0.3"
   }
 }
