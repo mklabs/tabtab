@@ -1,17 +1,15 @@
-## tabtab
-
-[![Build
-Status](https://secure.travis-ci.org/mklabs/node-tabtab.png)](http://travis-ci.org/mklabs/node-tabtab)
+# tabtab [![Build Status](https://secure.travis-ci.org/mklabs/node-tabtab.png)](http://travis-ci.org/mklabs/node-tabtab)
 
 An npm package to do some custom command line`<tab><tab>` completion for
-any system command, using the node api and JS to provide your own
-completion, for both bash/zsh shell.
+any system command.
+
+Using the node api and JS to provide your own completion, for both bash/zsh shell.
 
 Made possible using the same technique as npm (whose completion is quite
 awesome) relying on a bash/zsh completion shell script bridge to do the
 actual completion from node's land.
 
-### Install
+## Install
 
 Latest released version (when it'll get released)
 
@@ -21,32 +19,40 @@ Latest dev code:
 
     npm install https://github.com/mklabs/node-tabtab/tarball/master
 
-### Examples
+## Features
+
+- old
+
+## Todo
+
+- Binary to manage and discover completion
+- Chainable API
+- No API
+- `tabtab install` in package.json install script creates the completion file on user system
+- Automatic completion with package.json `completion|tabtab` property
+
+## Example
 
 You can add completion pretty easily in your node cli script:
 
 ```js
-#!/usr/bin/env node
-var tabtab = require('tabtab');
+var tab = require('tabtab');
 
-if(process.argv.slice(2)[0] === 'completion') return tabtab.complete('pkgname', function(err, data) {
-  // simply return here if there's an error or data not provided.
-  // stderr not showing on completions
-  if(err || !data) return;
 
-  if(/^--\w?/.test(data.last)) return tabtab.log(['help', 'version'], data, '--');
-  if(/^-\w?/.test(data.last)) return tabtab.log(['n', 'o', 'd', 'e'], data, '-');
-
-  tabtab.log(['list', 'of', 'commands'], data);
+tab.on('complete', function(err, data, done) {
+  // General handler
+  done(null, ['foo', bar']);
 });
 
-// The rest of your script
-...
+// yourbin command completion
+//
+// Ex. yourbin list
+tab.on('list', function(err, data, done) {
+  done(null, ['file.js', 'file2.js']);
+});
 ```
 
-Simply replace `pkgname` by the name of your package. The complete
-callback get's called with data only in the context of a completion
-command.
+These events are emitted whenever the command `completion -- ..` is triggered.
 
 The `data` object holds interesting value to drive the output of the
 completion:
@@ -59,7 +65,7 @@ completion:
 * `lastPartial`: last partial of the line
 * `prev`: the previous word
 
-#### completion install
+## Completion Install
 
 Installing the completion for your cli app is done very much [like npm
 does](https://docs.npmjs.com/cli/completion):
@@ -70,7 +76,102 @@ It'll enables tab-completion for the `pkgname` executable. Adding it to
 your ~/.bashrc or ~/.zshrc will make the completions available
 everywhere (not only the current shell).
 
+## CLI
+
+tabtab provides a binary to manage and discover completion on the user system.
+It provides utilities for install, removing a completion file, to discover and
+enable additional completion etc.
+
+
+    $ tabtab <command> [options]
+
+    Options:
+      -h, --help              Show this help output
+      -v, --version           Show package version
+      -s, --silent            Silent mode for commands like install
+      -y, --yes               Skips confirmation prompts
+
+    Commands:
+
+      install                 Install and enable completion file on user system
+      uninstall               Undo the install command
+      list                    List the completion files managed by tabtab
+      search                  Search npm registry for tabtab completion files / dictionaries
+      add                     Install additional completion files / dictionaries
+      rm/remove               Uninstall completion file / dictionnary
+
+
+### tabtab install
+
+    $ tabtab install --help
+
+    Options:
+      --zshrc                 Source completion in ~/.zshrc
+      --bashrc                Source completion in ~/.bashrc
+      --auto                  Let tabtab check for user environment to edit
+                              either zshrc or bashrc
+      --system                Use /etc/bash_completion.d system directory
+
+      --console               Outputs script to console and writes nothing
+
+This command lets you source the completion script to a particular place.
+Defaults is to use `/etc/bash_completion.d` dir if it exists, and fallback to
+~/.bashrc or ~/.zshrc files.
+
+#### npm install script
+
+Using npm's install script, you can automatically install completion for your
+program whenever it gets globally installed.
+
+```json
+{
+  "scripts": {
+    "install": "tabtab install"
+  }
+}
+```
+
+On install, npm will execute the `tabtab install` command automatically in the
+context of your package.
+
+Ex.
+
+```json
+{
+  "name": "foobar",
+  "bin": "bin/foobar",
+  "scripts": {
+    "install": "tabtab install"
+  },
+  "dependencies": {
+    "tabtab": "^1.0.0"
+  }
+}
+```
+
+It will writes the output of `tabtab completion --name foobar` to
+`/etc/bash_completion.d/foobar` and enable completion for your program
+automatically whenever a user install your package.
+
+### tabtab uninstall
+
+    $ tabtab uninstall foobar
+
+Attemps to uninstall a previous tabtab install. `tabtab install` adds an entry
+to an internal registry of completions, to be able to undo the operation on
+uninstall.
+
+### tabtab ...
+
+- tabtab list
+- tabtab search
+- tabtab add
+- tabtab rm/remove
+
+
 ## API
+
+> old stuff
 
 ### complete
 
