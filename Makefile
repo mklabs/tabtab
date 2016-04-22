@@ -7,6 +7,12 @@ babel:
 lint:
 	eslint . --env es6
 
+docs:
+	tomdox lib/complete.js lib/debug.js lib/index.js lib/commands/*.js --primary orange --accent deep_orange --icon keyboard_tab --prefix https://mklabs.github.io/tabtab/
+
+serve:
+	serve docs
+
 env:
 	@echo $(PATH)
 
