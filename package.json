@@ -5,7 +5,7 @@
   "bin": "bin/tabtab",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test",
+    "test": "babel-node ./node_modules/.bin/mocha test",
     "pretest": "babel lib/ -d src/",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
