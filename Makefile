@@ -10,8 +10,8 @@ lint:
 docs:
 	tomdox lib/complete.js lib/debug.js lib/index.js lib/commands/*.js --primary orange --accent deep_orange --icon keyboard_tab --prefix https://mklabs.github.io/node-tabtab/
 
-serve:
-	serve docs
+ghpages:
+	bake docs && git co gh-pages && git rm -r . && cp -r docs/* . && git add . && git ci
 
 env:
 	@echo $(PATH)
