@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha test",
+    "pretest": "babel lib/ -d src/",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "devDependencies": {
