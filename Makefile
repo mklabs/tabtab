@@ -1,27 +1,27 @@
 test: babel
-	mocha test/ -R min
+  mocha test/ -R spec
 
 babel:
-	babel lib/ -d src/
+  babel lib/ -d src/
 
 lint:
-	eslint . --env es6
+  eslint . --env es6
 
 docs:
-	tomdox lib/complete.js lib/debug.js lib/index.js lib/commands/*.js --primary orange --accent deep_orange --icon keyboard_tab --prefix https://mklabs.github.io/node-tabtab/
+  tomdox lib/complete.js lib/debug.js lib/index.js lib/commands/*.js --primary orange --accent deep_orange --icon keyboard_tab --prefix https://mklabs.github.io/node-tabtab/
 
 ghpages:
-	bake docs && git co gh-pages && git rm -r . && cp -r docs/* . && git add . && git ci
+  bake docs && git co gh-pages && git rm -r . && cp -r docs/* . && git add . && git ci
 
 env:
-	@echo $(PATH)
+  @echo $(PATH)
 
-build: test lint
+build: test
 
 tt:
-	COMP_LINE="list --foo" COMP_CWORD=2 COMP_POINT=4 tabtab completion
+  COMP_LINE="list --foo" COMP_CWORD=2 COMP_POINT=4 tabtab completion
 
 watch:
-	watchd lib/**/* test/**/* bin/* -c 'bake build'
+  watchd lib/*.js lib/**/* test/**/* bin/* -c 'bake build'
 
 all: build watch
