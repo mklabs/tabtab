@@ -7,6 +7,8 @@ Made possible using the same technique as npm (whose completion is quite
 awesome) relying on a shell script bridge to do the actual completion from
 node's land.
 
+---
+
 - Supports **zsh**, **fish** and **bash**
 - CLI tool to manage and discover completion.
 - Automatic completion from `package.json` config
@@ -16,11 +18,32 @@ node's land.
   asking the user for install location.
   - `tabtab install` in package.json install script creates the completion file on user system.
 
+---
+
+<!-- toc -->
+* [Install](#install)
+* [Documentation](#documentation)
+  * [API](#api)
+  * [package.json](#packagejson)
+* [Completions](#completions)
+  * [Manual Installation](#manual-installation)
+  * [Automatic Installation](#automatic-installation)
+    * [npm script:install](#npm-scriptinstall)
+  * [Completions for other programs](#completions-for-other-programs)
+  * [Completion description](#completion-description)
+* [CLI](#cli)
+  * [tabtab install](#tabtab-install)
+* [Credits](#credits)
+
+<!-- toc stop -->
+
 ## Install
 
     npm install tabtab --save
 
 ## Documentation
+
+### API
 
 You can add completion pretty easily in your node cli script:
 
@@ -61,7 +84,7 @@ completion:
 * `lastPartial`: last partial of the line
 * `prev`: the previous word
 
-#### package.json
+### package.json
 
 While the EventEmitter API can offer fine control over what gets completed,
 completion values can be defined directly in the `package.json` file, using the
@@ -82,9 +105,9 @@ This still requires to initialize tabtab with:
 require('tabtab')().start();
 ```
 
-### Completion Install
+## Completions
 
-#### Manual
+### Manual Installation
 
 Manually loading the completion for your cli app is done very much [like npm
 does](https://docs.npmjs.com/cli/completion):
@@ -100,7 +123,7 @@ the current shell).
 This requires an additional manual step for the user. Ideally we'd want it to
 be automatic, and define it at a system-level.
 
-#### Automatic
+### Automatic Installation
 
 For completions to be active for a particular command/program, the user shell
 (bash, zsh or fish) must load a specific file when the shell starts.
@@ -118,7 +141,7 @@ figure out the most appropriate directory depending on the `$SHELL` variable.
 completion script when the package is installed on the user system, using npm
 script.
 
-##### npm script:install
+#### npm script:install
 
 Using npm's install/uninstall script, you can automatically manage completion
 for your program whenever it gets globally installed or removed.
@@ -158,59 +181,9 @@ should do:
 ![zsh](./docs/img/zsh-install.png)
 ![fish](./docs/img/fish-install.png)
 
-
-## CLI
-
-tabtab(1) - manage and discover completion on the user system.  It provides
-utilities for install, removing a completion file, to discover and enable
-additional completion etc.
+### Completions for other programs
 
 
-    $ tabtab <command> [options]
-
-    Options:
-      -h, --help              Show this help output
-      -v, --version           Show package version
-
-    Commands:
-
-      install                 Install and enable completion file on user system
-
-<!--- uninstall               Undo the install command --->
-<!--- list                    List the completion files managed by tabtab --->
-<!--- search                  Search npm registry for tabtab completion files / dictionaries --->
-<!--- add                     Install additional completion files / dictionaries --->
-<!--- rm/remove               Uninstall completion file / dictionnary --->
-
-
-### tabtab install
-
-    $ tabtab install --help
-
-    Options:
-      --stdout                Outputs script to console and writes nothing
-      --name                  Program name to complete
-      --completer             Program that drives the completion (default: --name)
-
-
-Triggers the installation process and asks user for install location. `--name`
-if not defined, is determined from `package.json` name property. `--completer`
-can be used to delegate the completion to another program. Ex.
-
-    $ tabtab install --name bower --completer bower-complete
-
-<!--- ### tabtab uninstall --->
-<!---  --->
-<!---     $ tabtab uninstall foobar --->
-<!---  --->
-<!--- Attemps to uninstall a previous tabtab install. `tabtab install` adds an entry --->
-<!--- to an internal registry of completions, to be able to undo the operation on --->
-<!--- uninstall. --->
-
-`tabtab install` is not meant to be run directly, but rather used with your
-`package.json` scripts.
-
-## Completions for other programs
 
 The `--completer` option allows you to delegate the completion part to another program. Let's nvm as an example.
 
@@ -285,6 +258,58 @@ your terminal).
 > completion item, implemented with fish, have to adjust the same pattern to
 > zsh.
 
+## CLI
+
+tabtab(1) - manage and discover completion on the user system.
+
+It provides utilities for installin a completion file, to discover and
+enable additional completion etc.
+
+
+    $ tabtab <command> [options]
+
+    Options:
+      -h, --help              Show this help output
+      -v, --version           Show package version
+
+    Commands:
+
+      install                 Install and enable completion file on user system
+
+<!--- uninstall               Undo the install command --->
+<!--- list                    List the completion files managed by tabtab --->
+<!--- search                  Search npm registry for tabtab completion files / dictionaries --->
+<!--- add                     Install additional completion files / dictionaries --->
+<!--- rm/remove               Uninstall completion file / dictionnary --->
+
+
+### tabtab install
+
+    $ tabtab install --help
+
+    Options:
+      --stdout                Outputs script to console and writes nothing
+      --name                  Program name to complete
+      --completer             Program that drives the completion (default: --name)
+
+
+Triggers the installation process and asks user for install location. `--name`
+if not defined, is determined from `package.json` name property. `--completer`
+can be used to delegate the completion to another program. Ex.
+
+    $ tabtab install --name bower --completer bower-complete
+
+<!--- ### tabtab uninstall --->
+<!---  --->
+<!---     $ tabtab uninstall foobar --->
+<!---  --->
+<!--- Attemps to uninstall a previous tabtab install. `tabtab install` adds an entry --->
+<!--- to an internal registry of completions, to be able to undo the operation on --->
+<!--- uninstall. --->
+
+`tabtab install` is not meant to be run directly, but rather used with your
+`package.json` scripts.
+
 ## Credits
 
 npm does pretty amazing stuff with its completion feature. Bash and zsh
@@ -317,5 +342,4 @@ work.
 
 > [MIT](./LICENSE) &nbsp;&middot;&nbsp;
 > [mkla.bz](http://mkla.bz) &nbsp;&middot;&nbsp;
-> GitHub [@mklabs](https://github.com/mklabs) &nbsp;&middot;&nbsp;
-> Twitter [@mklabs](https://twitter.com/mklabs)
+> [@mklabs](https://github.com/mklabs)
