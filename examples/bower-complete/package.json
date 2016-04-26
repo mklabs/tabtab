@@ -1,0 +1,12 @@
+{
+  "name": "bower-complete",
+  "version": "1.0.0",
+  "description": "tabtab completion for bower",
+  "bin": "index.js",
+  "scripts": {
+    "install": "tabtab install --name bower --completer bower-complete"
+  },
+  "dependencies": {
+    "parse-help": "^0.1.0"
+  }
+}
