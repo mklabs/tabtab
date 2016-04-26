@@ -28,9 +28,7 @@ describe('CLI', () => {
     tabtab('install')
       // Prompt first answer, output to stdout
       .prompt(/Where do you want/, '\n')
-      .expect('complete -o default -F _tabtab_completion tabtab')
-      .expect('compdef _tabtab_completion tabtab')
-      .expect('compctl -K _tabtab_completion tabtab')
+      .expect('complete ')
       .end(done);
   });
 
