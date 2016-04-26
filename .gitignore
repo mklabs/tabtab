@@ -1,3 +1,4 @@
 .completions/tt
 .tern-port
 src/
+.completions/
