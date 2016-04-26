@@ -1,17 +1,11 @@
 # tabtab [![Build Status](https://secure.travis-ci.org/mklabs/node-tabtab.png)](http://travis-ci.org/mklabs/node-tabtab) ![v1.0.0-pre](https://img.shields.io/badge/version-1.0.0--pre-green.svg)
 
-An npm package to do some custom command line`<tab><tab>` completion for any
-system command, for bash/zsh/fish shells.
+A node package to do some custom command line`<tab><tab>` completion for any
+system command, for Bash, Zsh, and Fish shells.
 
 Made possible using the same technique as npm (whose completion is quite
-awesome) relying on a bash/zsh completion shell script bridge to do the
-actual completion from node's land.
-
-## Install
-
-    npm install tabtab --save
-
-## Features
+awesome) relying on a shell script bridge to do the actual completion from
+node's land.
 
 - Supports **zsh**, **fish** and **bash**
 - CLI tool to manage and discover completion.
@@ -21,6 +15,10 @@ actual completion from node's land.
 - A way to install completion script for a given shell on `npm install`, gently
   asking the user for install location.
   - `tabtab install` in package.json install script creates the completion file on user system.
+
+## Install
+
+    npm install tabtab --save
 
 ## Documentation
 
