@@ -1,4 +1,4 @@
-# tabtab [![Build Status](https://secure.travis-ci.org/mklabs/node-tabtab.png)](http://travis-ci.org/mklabs/node-tabtab)
+# tabtab [![Build Status](https://secure.travis-ci.org/mklabs/node-tabtab.png)](http://travis-ci.org/mklabs/node-tabtab) / ![v1.0.0-pre](https://img.shields.io/badge/version-1.0.0--pre-lightgrey.svg)
 
 An npm package to do some custom command line`<tab><tab>` completion for any
 system command, for bash/zsh/fish shells.
