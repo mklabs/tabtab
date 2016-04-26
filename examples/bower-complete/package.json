@@ -1,12 +1,29 @@
 {
   "name": "bower-complete",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "tabtab completion for bower",
-  "bin": "index.js",
+  "bin": {
+    "bower-complete": "index.js"
+  },
   "scripts": {
     "install": "tabtab install --name bower --completer bower-complete"
   },
   "dependencies": {
-    "parse-help": "^0.1.0"
-  }
+    "parse-help": "^0.1.0",
+    "tabtab": "^1.0.0-pre"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/mklabs/node-tabtab.git"
+  },
+  "keywords": [
+    "bower",
+    "completion"
+  ],
+  "author": "mklabs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mklabs/node-tabtab/issues"
+  },
+  "homepage": "https://github.com/mklabs/node-tabtab#readme"
 }
