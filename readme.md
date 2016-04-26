@@ -47,9 +47,8 @@ tab.start();
 These events are emitted whenever the command `program completion -- ..` is
 triggered, with special `COMP_*` environment variables.
 
-`tab.start()` will define two commands: `completion` and `completion-script`
-for your program, the first is used by the Shell completion scripts, the second
-is used to output the completion script to stdout.
+`tab.start()` will define one command: `completion` for your program, which is
+used by the Shell completion scripts.
 
 The `data` object holds interesting value to drive the output of the
 completion:
@@ -90,13 +89,13 @@ require('tabtab')().start();
 Manually loading the completion for your cli app is done very much [like npm
 does](https://docs.npmjs.com/cli/completion):
 
-    . <(program completion-output)
+    . <(tabtab install --stdout --name program)
 
-It'll enables tab-completion for the `program` executable. Adding it to
-your ~/.bashrc or ~/.zshrc will make the completions available
-everywhere (not only the current shell).
+It'll enables tab-completion for the `program` executable. Adding it to your
+~/.bashrc or ~/.zshrc will make the completions available everywhere (not only
+the current shell).
 
-    program completion >> ~/.bashrc
+    tabtab install --stdout --name program >> ~/.bashrc # or ~/.zshrc
 
 This requires an additional manual step for the user. Ideally we'd want it to
 be automatic, and define it at a system-level.
@@ -127,8 +126,7 @@ for your program whenever it gets globally installed or removed.
 ```json
 {
   "scripts": {
-    "install": "tabtab install",
-    "uninstall": "tabtab uninstall"
+    "install": "tabtab install"
   }
 }
 ```
@@ -143,8 +141,7 @@ Ex.
   "name": "foobar",
   "bin": "bin/foobar",
   "scripts": {
-    "install": "tabtab install",
-    "uninstall": "tabtab uninstall"
+    "install": "tabtab install"
   },
   "dependencies": {
     "tabtab": "^1.0.0"
@@ -212,6 +209,81 @@ can be used to delegate the completion to another program. Ex.
 
 `tabtab install` is not meant to be run directly, but rather used with your
 `package.json` scripts.
+
+## Completions for other programs
+
+The `--completer` option allows you to delegate the completion part to another program. Let's nvm as an example.
+
+The idea is to create a package named `nvm-complete`, with an executable that
+loads `tabtab` and handle the completion output of `nvm-complete completion`.
+
+```json
+{
+  "name": "nvm-complete",
+  "bin": "./index.js",
+  "scripts": {
+    "install": "tabtab install --name nvm --completer nvm-complete"
+  },
+  "dependencies": {
+    "tabtab": "^1.0.0"
+  }
+}
+```
+
+```js
+// index.js
+var tabtab = require('tabtab');
+
+tabtab.on('nvm', function(data, done) {
+  return done(null, ['ls', 'ls-remote', 'install', 'use', ...]);
+});
+
+tabtab.start();
+```
+
+Alternatively, we can use tabtab property in package.json file to define static
+list of completion results:
+
+```json
+{
+  "tabtab": {
+    "nvm": ["help", "use", "install", "uninstall", "run", "current", "ls", "ls-remote"],
+    "use": ["stable", "default", "iojs", "v5.11.0", "v6.0.0"]
+  }
+}
+```
+
+For more control over the completion results, the JS api is useful for
+returning specific values depdending on preceding words, like completing each
+node versions on `nvm install <tab>`.
+
+```js
+var exex = require('child_process').exec;
+
+// To cache the list of versions returned by ls-remote
+var versions = [];
+tabtab.on('install', function(data, done) {
+  if (versions.length) return done(null, versions);
+
+  // Ask nvm the list of remote, and return each as a completion item
+  exec('nvm ls-remote', function(err, stdout) {
+    if (err) return done(err);
+    versions = versions.concat(stdout.split(/\n/));
+    return done(null, versions);
+  });
+});
+```
+
+On global installation of `nvm-complete`, the user will be asked for
+installation instruction (output to stdout, write to shell config, or a system
+dir). The completion should be active on reload or next login (close / reopen
+your terminal).
+
+### Completion description
+
+> todo: zsh / fish offers the ability to define description with each
+> completion item, implemented with fish, have to adjust the same pattern to
+> zsh.
 
 ## Credits
 
