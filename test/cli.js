@@ -1,8 +1,12 @@
 const assert = require('assert');
 const cli    = require('gentle-cli');
 
+const path = require('path');
+
+const tabpath = path.join(__dirname, '../bin/tabtab');
+
 function tabtab(cmd) {
-  return cli().use(cmd ? 'tabtab ' + cmd : 'tabtab');
+  return cli().use(cmd ? `node ${tabpath} ` + cmd : `node ${tabpath}`);
 }
 
 describe('CLI', () => {

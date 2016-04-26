@@ -13,10 +13,14 @@ actual completion from node's land.
 
 ## Features
 
-- Binary to manage and discover completion
-- Automatic completion from help output
-- `tabtab install` in package.json install script creates the completion file on user system
-- Automatic completion with package.json `completion|tabtab` property
+- Supports **zsh**, **fish** and **bash**
+- CLI tool to manage and discover completion.
+- Automatic completion from `package.json` config
+- Or using an EventEmitter based API
+- Manual or Automatic installation using system dirs (ex. `/usr/share/bash-completion/completions` for bash).
+- A way to install completion script for a given shell on `npm install`, gently
+  asking the user for install location.
+  - `tabtab install` in package.json install script creates the completion file on user system.
 
 ## Documentation
 
@@ -59,6 +63,27 @@ completion:
 * `last`: last word of the line
 * `lastPartial`: last partial of the line
 * `prev`: the previous word
+
+#### package.json
+
+While the EventEmitter API can offer fine control over what gets completed,
+completion values can be defined directly in the `package.json` file, using the
+`tabtab` property:
+
+```js
+{
+  "tabtab": {
+    "nvm": ["help", "use", "install", "uninstall", "run", "current", "ls", "ls-remote"],
+    "use": ["stable", "default", "iojs", "v5.11.0", "v6.0.0"]
+  }
+}
+```
+
+This still requires to initialize tabtab with:
+
+```js
+require('tabtab')().start();
+```
 
 ### Completion Install
 
