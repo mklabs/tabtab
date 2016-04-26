@@ -6,8 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "SHELL=zsh babel-node ./node_modules/.bin/mocha test",
-    "pretest": "babel lib/ -d src/",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "pretest": "babel lib/ -d src/"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",
@@ -17,7 +16,6 @@
     "gentle-cli": "^1.0.3",
     "jscs": "^3.0.3",
     "mocha": "^2.4.5",
-    "semantic-release": "^4.3.5",
     "watchd": "^1.0.0"
   },
   "license": "MIT",
@@ -40,5 +38,5 @@
     "mkdirp": "^0.5.1",
     "npmlog": "^2.0.3"
   },
-  "version": "1.0.0-pre"
+  "version": "1.0.0"
 }

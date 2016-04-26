@@ -13,7 +13,7 @@
     "test": "export cmd=\"yo\" && DEBUG=\"tabtab*\" COMP_POINT=\"4\" COMP_LINE=\"$cmd\" COMP_CWORD=\"$cmd\" yo-complete completion -- yo $cmd"
   },
   "dependencies": {
-    "parse-help": "^0.1.0"
+    "tabtab": "^1.0.0"
   },
   "repository": {
     "type": "git",
@@ -29,9 +29,30 @@
   "bugs": {
     "url": "https://github.com/mklabs/node-tabtab/issues"
   },
-
   "tabtab": {
-    "yo": ["-f", "--force", "--version", "--no-color", "--no-insight", "--insight", "--generators"],
-    "angular": ["common", "constant", "controller", "decorator", "directive", "factory", "filter", "main", "provider", "route", "service", "value", "view"]
+    "yo": [
+      "-f",
+      "--force",
+      "--version",
+      "--no-color",
+      "--no-insight",
+      "--insight",
+      "--generators"
+    ],
+    "angular": [
+      "common",
+      "constant",
+      "controller",
+      "decorator",
+      "directive",
+      "factory",
+      "filter",
+      "main",
+      "provider",
+      "route",
+      "service",
+      "value",
+      "view"
+    ]
   }
 }

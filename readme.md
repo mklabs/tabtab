@@ -1,4 +1,4 @@
-# tabtab [![Build Status](https://secure.travis-ci.org/mklabs/node-tabtab.png)](http://travis-ci.org/mklabs/node-tabtab) ![v1.0.0-pre](https://img.shields.io/badge/version-1.0.0--pre-green.svg)
+# tabtab [![Build Status](https://secure.travis-ci.org/mklabs/node-tabtab.png)](http://travis-ci.org/mklabs/node-tabtab) ![v1.0.0-pre](https://img.shields.io/badge/version-1.0.0-green.svg)
 
 A node package to do some custom command line`<tab><tab>` completion for any
 system command, for Bash, Zsh, and Fish shells.
@@ -29,12 +29,14 @@ node's land.
   * [Manual Installation](#manual-installation)
   * [Automatic Installation](#automatic-installation)
     * [npm script:install](#npm-scriptinstall)
-  * [Completions for other programs](#completions-for-other-programs)
   * [Completion description](#completion-description)
+  * [Completion for other programs](#completion-for-other-programs)
+    * [nvm](#nvm)
+    * [Bower](#bower)
+    * [Yeoman](#yeoman)
 * [CLI](#cli)
   * [tabtab install](#tabtab-install)
 * [Credits](#credits)
-
 <!-- toc stop -->
 
 ## Install
@@ -181,11 +183,19 @@ should do:
 ![zsh](./docs/img/zsh-install.png)
 ![fish](./docs/img/fish-install.png)
 
-### Completions for other programs
+### Completion description
+
+> todo: zsh / fish offers the ability to define description with each
+> completion item, implemented with fish, have to adjust the same pattern to
+> zsh.
 
 
+### Completion for other programs
 
-The `--completer` option allows you to delegate the completion part to another program. Let's nvm as an example.
+#### nvm
+
+The `--completer` option allows you to delegate the completion part to another
+program. Let's take nvm as an example.
 
 The idea is to create a package named `nvm-complete`, with an executable that
 loads `tabtab` and handle the completion output of `nvm-complete completion`.
@@ -252,17 +262,25 @@ installation instruction (output to stdout, write to shell config, or a system
 dir). The completion should be active on reload or next login (close / reopen
 your terminal).
 
-### Completion description
+#### Bower
 
-> todo: zsh / fish offers the ability to define description with each
-> completion item, implemented with fish, have to adjust the same pattern to
-> zsh.
+**[examples/bower-complete](./examples/bower-complete#readme)**
+
+![bower-complete](http://i.imgur.com/KH3VQWU.png)
+
+#### Yeoman
+
+**[examples/yo-complete](./examples/yo-complete#readme)**
+
+![yo](http://i.imgur.com/LQYxCbZ.png)
+
+![yo](http://i.imgur.com/yCjK3tJ.png)
 
 ## CLI
 
 tabtab(1) - manage and discover completion on the user system.
 
-It provides utilities for installin a completion file, to discover and
+It provides utilities for installing a completion file, to discover and
 enable additional completion etc.
 
 

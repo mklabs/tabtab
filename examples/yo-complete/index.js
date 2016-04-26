@@ -1,5 +1,4 @@
 #! /usr/bin/env node
 
-var tabtab = require('../..')();
-
+var tabtab = require('tabtab')();
 tabtab.start();
