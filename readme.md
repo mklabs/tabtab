@@ -1,9 +1,7 @@
 # tabtab [![Build Status](https://secure.travis-ci.org/mklabs/node-tabtab.png)](http://travis-ci.org/mklabs/node-tabtab)
 
-An npm package to do some custom command line`<tab><tab>` completion for
-any system command.
-
-Using the node api and JS to provide your own completion, for both bash/zsh shell.
+An npm package to do some custom command line`<tab><tab>` completion for any
+system command, for bash/zsh/fish shells.
 
 Made possible using the same technique as npm (whose completion is quite
 awesome) relying on a bash/zsh completion shell script bridge to do the
@@ -11,39 +9,45 @@ actual completion from node's land.
 
 ## Install
 
-Latest released version (when it'll get released)
-
-    npm install tabtab
+    npm install tabtab --save
 
 ## Features
-
-> wip
 
 - Binary to manage and discover completion
 - Automatic completion from help output
 - `tabtab install` in package.json install script creates the completion file on user system
 - Automatic completion with package.json `completion|tabtab` property
 
-## Example
+## Documentation
 
 You can add completion pretty easily in your node cli script:
 
 ```js
+// Ex. bin/ entry point for a "program" package
 var tab = require('tabtab')();
 
-// General handler. Gets called on `foobar <tab>` and `foobar stuff ... <tab>`
-tab.on('foobar', function(data, done) {
+// General handler. Gets called on `program <tab>` and `program stuff ... <tab>`
+tab.on('program', function(data, done) {
   // General handler
   done(null, ['foo', 'bar']);
 });
 
-// Specific handler. Gets called on `foobar list <tab>`
+// Specific handler. Gets called on `program list <tab>`
 tab.on('list', function(data, done) {
   done(null, ['file.js', 'file2.js']);
 });
+
+// Start must be called to register the completion commands and listen for
+// completion.
+tab.start();
 ```
 
-These events are emitted whenever the command `completion -- ..` is triggered.
+These events are emitted whenever the command `program completion -- ..` is
+triggered, with special `COMP_*` environment variables.
+
+`tab.start()` will define two commands: `completion` and `completion-script`
+for your program, the first is used by the Shell completion scripts, the second
+is used to output the completion script to stdout.
 
 The `data` object holds interesting value to drive the output of the
 completion:
@@ -56,75 +60,43 @@ completion:
 * `lastPartial`: last partial of the line
 * `prev`: the previous word
 
-## Completion Install
+### Completion Install
 
-Installing the completion for your cli app is done very much [like npm
+#### Manual
+
+Manually loading the completion for your cli app is done very much [like npm
 does](https://docs.npmjs.com/cli/completion):
 
-    . <(pkgname completion)
+    . <(program completion-output)
 
-It'll enables tab-completion for the `pkgname` executable. Adding it to
+It'll enables tab-completion for the `program` executable. Adding it to
 your ~/.bashrc or ~/.zshrc will make the completions available
 everywhere (not only the current shell).
 
-## CLI
+    program completion >> ~/.bashrc
 
-tabtab provides a binary to manage and discover completion on the user system.
-It provides utilities for install, removing a completion file, to discover and
-enable additional completion etc.
+This requires an additional manual step for the user. Ideally we'd want it to
+be automatic, and define it at a system-level.
 
+#### Automatic
 
-    $ tabtab <command> [options]
+For completions to be active for a particular command/program, the user shell
+(bash, zsh or fish) must load a specific file when the shell starts.
 
-    Options:
-      -h, --help              Show this help output
-      -v, --version           Show package version
-      -s, --silent            Silent mode for commands like install
-      -y, --yes               Skips confirmation prompts
+Each shell have its own system, and different loading paths. `tabtab` tries to
+figure out the most appropriate directory depending on the `$SHELL` variable.
 
-    Commands:
+- **fish**  Uses `~/.config/fish/completions`
+- **zsh**  Uses `/usr/local/share/zsh/site-functions`
+- **bash** Asks `pkg-config` for completion directories if bash-completion is
+  installed (defaults to `/usr/share/bash-completion/completions` and
+  `/etc/bash_completion.d`)
 
-      install                 Install and enable completion file on user system
-      uninstall               Undo the install command
-      list                    List the completion files managed by tabtab
-      search                  Search npm registry for tabtab completion files / dictionaries
-      add                     Install additional completion files / dictionaries
-      rm/remove               Uninstall completion file / dictionnary
+`tabtab` CLI provides an `install` command to ease the process of installing a
+completion script when the package is installed on the user system, using npm
+script.
 
-
-### tabtab install
-
-    $ tabtab install --help
-
-    Options:
-      --zshrc                 Source completion in ~/.zshrc
-      --bashrc                Source completion in ~/.bashrc
-      --auto                  Let tabtab check for user environment to edit
-                              either zshrc or bashrc
-      --system                Use /etc/bash_completion.d system directory
-
-      --console               Outputs script to console and writes nothing
-
-This command lets you source the completion script to a particular place.
-Defaults is to use `/etc/bash_completion.d` dir if it exists, and fallback to
-~/.bashrc or ~/.zshrc files.
-
-### tabtab uninstall
-
-    $ tabtab uninstall foobar
-
-Attemps to uninstall a previous tabtab install. `tabtab install` adds an entry
-to an internal registry of completions, to be able to undo the operation on
-uninstall.
-
-### tabtab ...
-
-- tabtab list
-- tabtab search
-- tabtab add
-- tabtab rm/remove
-
-## npm scripts
+##### npm script:install
 
 Using npm's install/uninstall script, you can automatically manage completion
 for your program whenever it gets globally installed or removed.
@@ -157,77 +129,66 @@ Ex.
 }
 ```
 
-It will writes the output of `tabtab completion --name foobar` to
-`/etc/bash_completion.d/foobar` and enable completion for your program
-automatically whenever a user install your package, and undo the operation if
-removed.
+Nothing is done's without asking confirmation, `tabtab install` looks at the
+`$SHELL` variable to determine the best possible locations and uses
+[Inquirer](https://github.com/SBoudrias/Inquirer.js/) to ask the user what it
+should do:
 
-## API
-
-> old stuff
-
-### complete
-
-Main completion method, has support for installation and actual completion.
-
-    tabtab.complete(completed, completer, callback);
+![bash](./docs/img/bash-install.png)
+![zsh](./docs/img/zsh-install.png)
+![fish](./docs/img/fish-install.png)
 
 
-* completed: name of the command to complete
-* completer: *Optional* name of the command to call on completion (when
-  not set, completed and completer are the same)
-* callback: get called when a tab-completion command  happens.
+## CLI
 
-completed and completer are there only to set up and build the correct
-bash/zsh script, based on the `lib/completion.sh` template (which is
-based on npm's completion shell script)
+tabtab(1) - manage and discover completion on the user system.  It provides
+utilities for install, removing a completion file, to discover and enable
+additional completion etc.
 
-### log
 
-Helper to return completion output and log to standard output.
+    $ tabtab <command> [options]
 
-    tabtab.log(['list', 'of', 'values'], data, prefix);
+    Options:
+      -h, --help              Show this help output
+      -v, --version           Show package version
 
-* values: Array of values to complete against.
-* data: the data object returned by the complete callback, used mainly
-  to filter results accordingly upon the text that is supplied by the
-  user.
-* prefix: *Optional* a prefix to add to the completion results, useful
-  for options to add dashes (eg. `-` or `--`).
+    Commands:
 
-### parseOut
+      install                 Install and enable completion file on user system
 
-Helper to return the list of short and long options, parsed from the
-usual `--help` output of a command (cake/rake -H, vagrant, commander -h,
-optimist.help(), ...)
+<!--- uninstall               Undo the install command --->
+<!--- list                    List the completion files managed by tabtab --->
+<!--- search                  Search npm registry for tabtab completion files / dictionaries --->
+<!--- add                     Install additional completion files / dictionaries --->
+<!--- rm/remove               Uninstall completion file / dictionnary --->
 
-    var parsed = completion.parseOut(optimist.help());
-    console.log(parsed.shorts);
-    console.log(parsed.longs);
 
-Using a spawned process:
+### tabtab install
 
-    exec('rake -H', function(err, stdout, stderr) {
-      if(err) return;
-      var parsed = parseOut(stdout);
-      if(/^--\w?/.test(o.last)) return log(parsed.longs, data, '--');
-      if(/^-\w?/.test(o.last)) return log(parsed.shorts, data, '-');
-    });
+    $ tabtab install --help
 
-### parseTasks
+    Options:
+      --stdout                Outputs script to console and writes nothing
+      --name                  Program name to complete
+      --completer             Program that drives the completion (default: --name)
 
-same purpose as parseOut, but for parsing tasks from an help command
-(cake/rake -T, vagrant, etc.)
 
-  exec('cake', function(err, stdout, stderr) {
-    if(err) return;
-    var parsed = tasks = parseTasks(stdout, 'cake');
-    log(tasks, o);
-  });
+Triggers the installation process and asks user for install location. `--name`
+if not defined, is determined from `package.json` name property. `--completer`
+can be used to delegate the completion to another program. Ex.
 
-* stdout: string of help output.
-* prefix: prefix used internally to build the RegExp that is used to
-  parse tasks from stdout.
+    $ tabtab install --name bower --completer bower-complete
+
+<!--- ### tabtab uninstall --->
+<!---  --->
+<!---     $ tabtab uninstall foobar --->
+<!---  --->
+<!--- Attemps to uninstall a previous tabtab install. `tabtab install` adds an entry --->
+<!--- to an internal registry of completions, to be able to undo the operation on --->
+<!--- uninstall. --->
+
+`tabtab install` is not meant to be run directly, but rather used with your
+`package.json` scripts.
 
 ## Credits
 
@@ -257,3 +218,9 @@ completion is quite amazing.
 This whole package/module is based entirely on npm's code and @isaacs
 work.
 
+---
+
+> [MIT](./LICENSE) &nbsp;&middot;&nbsp;
+> [mkla.bz](http://mkla.bz) &nbsp;&middot;&nbsp;
+> GitHub [@mklabs](https://github.com/mklabs) &nbsp;&middot;&nbsp;
+> Twitter [@mklabs](https://twitter.com/mklabs)
