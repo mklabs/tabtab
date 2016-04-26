@@ -2,6 +2,8 @@
 
 A [tabtab]() plugin to implement bash / zsh / fish completion to [Bower][]
 
+![bower-complete](http://i.imgur.com/KH3VQWU.png)
+
 ## Install
 
     npm install bower-complete -g
@@ -25,7 +27,6 @@ Depending on your shell:
 
 **zsh**
 ![zsh][]
-
 
 [Bower]: http://bower.io
 [tabtab]: https://github.com/mklabs/node-tabtab
