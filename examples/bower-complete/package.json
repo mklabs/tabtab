@@ -1,20 +1,21 @@
 {
   "name": "bower-complete",
-  "version": "0.0.1",
   "description": "tabtab completion for bower",
   "bin": {
     "bower-complete": "index.js"
   },
   "scripts": {
-    "install": "tabtab install --name bower --completer bower-complete"
+    "install": "tabtab install --name bower --completer bower-complete",
+    "test": "export cmd=\"bower\" && COMP_POINT=\"4\" COMP_LINE=\"$cmd\" COMP_CWORD=\"$cmd\" bower-complete completion -- bower $cmd",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "dependencies": {
     "parse-help": "^0.1.0",
-    "tabtab": "^1.0.0-pre"
+    "tabtab": "^1.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/mklabs/node-tabtab.git"
+    "url": "https://github.com/mklabs/node-tabtab.git"
   },
   "keywords": [
     "bower",
@@ -25,5 +26,9 @@
   "bugs": {
     "url": "https://github.com/mklabs/node-tabtab/issues"
   },
-  "homepage": "https://github.com/mklabs/node-tabtab#readme"
+  "homepage": "https://github.com/mklabs/node-tabtab/tree/master/examples/bower-complete#readme",
+  "devDependencies": {
+    "semantic-release": "^4.3.5"
+  },
+  "version": "0.0.1"
 }
