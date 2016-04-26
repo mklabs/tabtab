@@ -39,5 +39,6 @@
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "npmlog": "^2.0.3"
-  }
+  },
+  "version": "1.0.0-pre"
 }
