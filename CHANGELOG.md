@@ -1,3 +1,13 @@
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+<a name="1.0.2"></a>
+## [1.0.2](https://github.com/mklabs/node-tabtab/compare/v1.0.1...v1.0.2) (2016-04-29)
+
+
+
+
 <a name="1.0.1"></a>
 ## 1.0.1 (2016-04-29)
 
@@ -137,6 +147,3 @@
 * completion: add basic abbrev support and test with nopt/commander opt ([a857dd2](https://github.com/mklabs/node-tabtab/commit/a857dd2))
 * completion: add cakefile completion, testing options/tasks completion ([33c272b](https://github.com/mklabs/node-tabtab/commit/33c272b))
 * completion: add optimist completion, have to parse out the help output ([6c1b1bb](https://github.com/mklabs/node-tabtab/commit/6c1b1bb))
-
-
-
