@@ -6,7 +6,9 @@
   "main": "index.js",
   "scripts": {
     "test": "SHELL=zsh babel-node ./node_modules/.bin/mocha test",
-    "pretest": "babel lib/ -d src/"
+    "babel": "babel lib/ -d src/",
+    "prepublish": "npm run babel",
+    "pretest": "npm run babel"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",
