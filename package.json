@@ -10,7 +10,7 @@
     "changelog": "npm run semantic",
     "prepublish": "npm run babel",
     "pretest": "npm run babel",
-    "release": "standard-version"
+    "release": "standard-version -m '%s'"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",
