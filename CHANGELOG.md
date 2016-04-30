@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.3"></a>
+## [1.0.3](https://github.com/mklabs/node-tabtab/compare/v1.0.2...v1.0.3) (2016-04-30)
+
+
+### Bug Fixes
+
+* **babel:** Add babel as prepublish step ([97fc9ce](https://github.com/mklabs/node-tabtab/commit/97fc9ce))
+
+
+
 <a name="1.0.2"></a>
 ## [1.0.2](https://github.com/mklabs/node-tabtab/compare/v1.0.1...v1.0.2) (2016-04-29)
 
