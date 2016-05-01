@@ -12,5 +12,5 @@ function _{pkgname}_completion
   end
 end
 
-complete -d 'tabtab' -c {pkgname} -a "(eval _{pkgname}_completion)"
+complete -d '{pkgname}' -c {pkgname} -a "(eval _{pkgname}_completion)"
 ###-end-{pkgname}-completion-###

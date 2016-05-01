@@ -13,7 +13,9 @@
     "test": "export cmd=\"yo\" && DEBUG=\"tabtab*\" COMP_POINT=\"4\" COMP_LINE=\"$cmd\" COMP_CWORD=\"$cmd\" yo-complete completion -- yo $cmd"
   },
   "dependencies": {
-    "tabtab": "^1.0.0"
+    "parse-help": "^0.1.0",
+    "tabtab": "^1.0.5",
+    "yeoman-environment": "^1.5.3"
   },
   "repository": {
     "type": "git",
@@ -37,7 +39,8 @@
       "--no-color",
       "--no-insight",
       "--insight",
-      "--generators"
+      "--generators",
+      "--loglevel"
     ],
     "angular": [
       "common",
@@ -53,6 +56,11 @@
       "service",
       "value",
       "view"
+    ],
+    "--loglevel": [
+      "error",
+      "warn",
+      "warm"
     ]
   }
 }
