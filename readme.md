@@ -277,44 +277,66 @@ your terminal).
 
 ![yo](http://i.imgur.com/yCjK3tJ.png)
 
+### Debugging completion
+
+On completion trigger (hitting tab), any STDOUT output is used as a completion
+results, and STDERR is completely silenced.
+
+To be able to log and debug completion scripts and functions, you can use
+`TABTAB_DEBUG` environment variable. When defined, tabtab will redirect any
+`debug` output to the file specified.
+
+    export TABTAB_DEBUG=/tmp/tabtab.log
+
+Trigger a completion, and `tail -f /tmp/tabtab.log` to see debugging output.
+
+to be able to use the logger in your own completion, you can
+`require('tabtab/lib/debug')`. it is a thin wrapper on top of the debug module,
+and has the same api and behavior, except when `process.env.tabtab_debug` is
+defined.
+
+```js
+const debug = require('tabtab/lib/debug')('tabtab:name');
+```
+
 ## CLI
 
 tabtab(1) - manage and discover completion on the user system.
 
-It provides utilities for installing a completion file, to discover and
+it provides utilities for installing a completion file, to discover and
 enable additional completion etc.
 
 
     $ tabtab <command> [options]
 
-    Options:
-      -h, --help              Show this help output
-      -v, --version           Show package version
+    options:
+      -h, --help              show this help output
+      -v, --version           show package version
 
-    Commands:
+    commands:
 
-      install                 Install and enable completion file on user system
+      install                 install and enable completion file on user system
 
-<!--- uninstall               Undo the install command --->
-<!--- list                    List the completion files managed by tabtab --->
-<!--- search                  Search npm registry for tabtab completion files / dictionaries --->
-<!--- add                     Install additional completion files / dictionaries --->
-<!--- rm/remove               Uninstall completion file / dictionnary --->
+<!--- uninstall               undo the install command --->
+<!--- list                    list the completion files managed by tabtab --->
+<!--- search                  search npm registry for tabtab completion files / dictionaries --->
+<!--- add                     install additional completion files / dictionaries --->
+<!--- rm/remove               uninstall completion file / dictionnary --->
 
 
 ### tabtab install
 
     $ tabtab install --help
 
-    Options:
-      --stdout                Outputs script to console and writes nothing
-      --name                  Program name to complete
-      --completer             Program that drives the completion (default: --name)
+    options:
+      --stdout                outputs script to console and writes nothing
+      --name                  program name to complete
+      --completer             program that drives the completion (default: --name)
 
 
-Triggers the installation process and asks user for install location. `--name`
+triggers the installation process and asks user for install location. `--name`
 if not defined, is determined from `package.json` name property. `--completer`
-can be used to delegate the completion to another program. Ex.
+can be used to delegate the completion to another program. ex.
 
     $ tabtab install --name bower --completer bower-complete
 
@@ -322,43 +344,43 @@ can be used to delegate the completion to another program. Ex.
 <!---  --->
 <!---     $ tabtab uninstall foobar --->
 <!---  --->
-<!--- Attemps to uninstall a previous tabtab install. `tabtab install` adds an entry --->
+<!--- attemps to uninstall a previous tabtab install. `tabtab install` adds an entry --->
 <!--- to an internal registry of completions, to be able to undo the operation on --->
 <!--- uninstall. --->
 
 `tabtab install` is not meant to be run directly, but rather used with your
 `package.json` scripts.
 
-## Credits
+## credits
 
-npm does pretty amazing stuff with its completion feature. Bash and zsh
+npm does pretty amazing stuff with its completion feature. bash and zsh
 provides command tab-completion, which allow you to complete the names
-of commands in your $PATH.  Usually these functions means bash
+of commands in your $path.  usually these functions means bash
 scripting, and in the case of npm, it is partially true.
 
-There is a special `npm completion` command you may want to look around,
+there is a special `npm completion` command you may want to look around,
 if not already.
 
     npm completion
 
-Running this should dump [this
+running this should dump [this
 script](https://raw.github.com/isaacs/npm/caafb7323708e113d100e3e8145b949ed7a16c22/lib/utils/completion.sh)
-to the console. This script works with both bash/zsh and map the correct
-completion functions to the npm executable. These functions takes care
-of parsing the `COMP_*` variables available when hitting TAB to complete
+to the console. this script works with both bash/zsh and map the correct
+completion functions to the npm executable. these functions takes care
+of parsing the `comp_*` variables available when hitting tab to complete
 a command, set them up as environment variables and run the `npm
 completion` command followed by `-- words` where words match value of
 the command being completed.
 
-This means that using this technique npm manage to perform bash/zsh
-completion using node and JavaScript. Actually, the comprehensiveness of npm
+this means that using this technique npm manage to perform bash/zsh
+completion using node and javascript. actually, the comprehensiveness of npm
 completion is quite amazing.
 
-This whole package/module is based entirely on npm's code and @isaacs
+this whole package/module is based entirely on npm's code and @isaacs
 work.
 
 ---
 
-> [MIT](./LICENSE) &nbsp;&middot;&nbsp;
+> [mit](./license) &nbsp;&middot;&nbsp;
 > [mkla.bz](http://mkla.bz) &nbsp;&middot;&nbsp;
 > [@mklabs](https://github.com/mklabs)
