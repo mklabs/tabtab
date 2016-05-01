@@ -32,7 +32,7 @@ describe('CLI', () => {
     tabtab('install')
       // Prompt first answer, output to stdout
       .prompt(/Where do you want/, '\n')
-      .expect('complete ')
+      .expect('tabtab_completion ')
       .end(done);
   });
 
