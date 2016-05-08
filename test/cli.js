@@ -6,11 +6,10 @@ const path = require('path');
 const tabpath = path.join(__dirname, '../bin/tabtab');
 
 function tabtab(cmd) {
-  return cli().use(cmd ? `node ${tabpath} ` + cmd : `node ${tabpath}`);
+  return cli().use(cmd ? 'node ' + tabpath + ' ' + cmd : 'node ' + tabpath + '');
 }
 
 describe('CLI', () => {
-
   it('outputs help', (done) => {
     tabtab()
       .expect(0, 'tabtab <command>')
@@ -35,6 +34,4 @@ describe('CLI', () => {
       .expect('tabtab_completion ')
       .end(done);
   });
-
-
 });
