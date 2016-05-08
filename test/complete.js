@@ -1,10 +1,15 @@
+const fs       = require('fs');
+const path     = require('path');
 const Complete = require('../src/complete');
 const assert   = require('assert');
 
 describe('Complete', () => {
 
   beforeEach(() => {
-    this.complete = new Complete();
+    this.complete = new Complete({
+      name: 'tabtab',
+      cache: false
+    });
   });
 
   it('Complete#new', () => {
@@ -36,5 +41,77 @@ describe('Complete', () => {
     assert.equal(env.lastPartial, 'b');
     assert.equal(env.prev, 'bar');
   });
+
+  describe('Complete#handle cache off', () => {
+    it('Emits appropriate event', (done) => {
+      this.complete.handle({
+        _: ['completion', '--', 'tabtab'],
+        cache: false,
+        env: {
+          COMP_LINE: 'tabtab',
+          COMP_CWORD: 'tabtab',
+          COMP_POINT: 0
+        }
+      });
+
+
+      this.complete.on('tabtab', (data, callback) => {
+        assert.equal(data.line, 'tabtab');
+        callback(null, ['foo', 'bar']);
+        done();
+      });
+    });
+  });
+
+  describe('Complete#handle cache on', () => {
+    beforeEach((done) => {
+      this.cachefile = path.join(__dirname, '../.completions/cache.json');
+
+      let next = (err) => {
+        if (err) return done(err);
+
+        this.complete = new Complete({
+          name: 'tabtab',
+          _: ['completion', '--', 'tabtab'],
+          env: {
+            COMP_LINE: 'tabtab',
+            COMP_CWORD: 'tabtab',
+            COMP_POINT: 0
+          }
+        });
+
+        done();
+      }
+
+      fs.stat(this.cachefile, (err, stats) => {
+        if (err && err.code === 'ENOENT') return next();
+        else if (err) return next(err);
+
+        fs.unlink(this.cachefile, next);
+      });
+    });
+
+    it('Emits appropriate event and writes response to cache', (done) => {
+      this.complete.handle();
+
+      this.complete.on('tabtab', (env, callback) => {
+        assert.equal(env.line, 'tabtab');
+        var results = ['foo', 'bar', 'baz'];
+        callback(null, results);
+        // done();
+
+        this.complete.handle();
+        //
+        this.complete.on('tabtab:cache', (env) => {
+          assert.equal(env.line, 'tabtab');
+
+          var cache = require(this.cachefile).cache;
+          assert.deepEqual(cache.tabtab, ['foo', 'bar', 'baz']);
+          done();
+        });
+      });
+    });
+  });
+
 
 });

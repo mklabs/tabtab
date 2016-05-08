@@ -1,5 +1,5 @@
 test: babel
-  mocha test/ -R spec
+	SHELL=zsh mocha test/ -R spec
 
 babel:
   babel lib/ -d src/
@@ -17,9 +17,6 @@ env:
   @echo $(PATH)
 
 build: test
-
-tt:
-  COMP_LINE="list --foo" COMP_CWORD=2 COMP_POINT=4 tabtab completion
 
 watch:
   watchd lib/*.js lib/**/* test/**/* bin/* -c 'bake build'
