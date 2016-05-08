@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/mklabs/node-tabtab/compare/v1.2.1...v1.3.0) (2016-05-08)
+
+
+### Features
+
+* **cache:** Add option to enable / disable cache([7c482a4](https://github.com/mklabs/node-tabtab/commit/7c482a4)), closes [#20](https://github.com/mklabs/node-tabtab/issues/20)
+* **cache:** Implement cache TTL (default: 5 min)([9157e81](https://github.com/mklabs/node-tabtab/commit/9157e81)), closes [#20](https://github.com/mklabs/node-tabtab/issues/20)
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/mklabs/node-tabtab/compare/v1.2.0...v1.2.1) (2016-05-08)
 
