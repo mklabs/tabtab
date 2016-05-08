@@ -2,3 +2,4 @@
 .tern-port
 src/
 .completions/
+node_modules/
