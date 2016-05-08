@@ -77,7 +77,9 @@ describe('Complete', () => {
             COMP_LINE: 'tabtab',
             COMP_CWORD: 'tabtab',
             COMP_POINT: 0
-          }
+          },
+
+          ttl: 100
         });
 
         done();
@@ -98,16 +100,37 @@ describe('Complete', () => {
         assert.equal(env.line, 'tabtab');
         var results = ['foo', 'bar', 'baz'];
         callback(null, results);
-        // done();
 
         this.complete.handle();
-        //
         this.complete.on('tabtab:cache', (env) => {
           assert.equal(env.line, 'tabtab');
 
-          var cache = require(this.cachefile).cache;
-          assert.deepEqual(cache.tabtab, ['foo', 'bar', 'baz']);
+          var cache = JSON.parse(fs.readFileSync(this.cachefile, 'utf8')).cache;
+          assert.deepEqual(cache.tabtab.value, ['foo', 'bar', 'baz']);
           done();
+        });
+      });
+    });
+
+    describe('TTL duration', () => {
+      it('Honors TTL duration', (done) => {
+        this.complete.handle();
+
+        this.complete.on('tabtab', (env, callback) => {
+          assert.equal(env.line, 'tabtab');
+          var results = ['foo', 'bar', 'baz'];
+          callback(null, results);
+
+          setTimeout(() => {
+            this.complete.handle();
+            this.complete.on('tabtab:cache', (env) => {
+              assert.equal(env.line, 'tabtab');
+
+              var cache = JSON.parse(fs.readFileSync(this.cachefile, 'utf8')).cache;
+              assert.ok(!cache.tabtab);
+              done();
+            });
+          }, 300);
         });
       });
     });

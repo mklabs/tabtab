@@ -87,6 +87,26 @@ completion:
 * `lastPartial`: last partial of the line
 * `prev`: the previous word
 
+#### Options
+
+```js
+new Complete({
+  // the String package name being completed, defaults to process.title
+  // (if not node default) or will attempt to determine parent's
+  // package.json location and extract the name from it.
+  name: 'foobar'
+
+  // Enable / Disable cache (defaults: true)
+  cache: true,
+
+  // Cache Time To Live duration in ms (default: 5min)
+  ttl: 1000 * 60 * 5
+});
+```
+
+Completion results are cached by default, for a duration of 5 minutes. Caching
+is based on the value of the full command being completed (`data.line`).
+
 ### package.json
 
 While the EventEmitter API can offer fine control over what gets completed,
