@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/mklabs/node-tabtab/compare/v1.1.1...v1.2.0) (2016-05-08)
+
+
+### Bug Fixes
+
+* Use Object.assign polyfill to run on older version of node([157057a](https://github.com/mklabs/node-tabtab/commit/157057a))
+
+
+### Features
+
+* implement a basic cache mechanism([bb4216c](https://github.com/mklabs/node-tabtab/commit/bb4216c))
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/mklabs/node-tabtab/compare/v1.1.0...v1.1.1) (2016-05-01)
 
