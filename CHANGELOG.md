@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* **bash:** Silently fail if pkg-config bash-completion exists with non 0([931a746](https://github.com/mklabs/node-tabtab/commit/931a746))
+* **bash:** Silently fail if pkg-config bash-completion exits with non 0([931a746](https://github.com/mklabs/node-tabtab/commit/931a746))
 
 
 
