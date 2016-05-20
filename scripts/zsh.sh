@@ -1,17 +1,13 @@
-###-begin-yo-completion-###
-_yo_completion () {
-  local cword line point words reply
-  read -Ac words
-  read -cn cword
-  let cword-=1
-  read -l line
-  read -ln point
-
+###-begin-{pkgname}-completion-###
+_{pkgname}_completion () {
+  local reply
   local si=$IFS
-  IFS=$'\n' reply=($(COMP_CWORD="$cword" COMP_LINE="$line" COMP_POINT="$point" yo-complete completion -- "${words[@]}"))
+
+  IFS=$'\n' reply=($(COMP_CWORD="$((CURRENT-1))" COMP_LINE="$BUFFER" COMP_POINT="0" {completer} completion -- "${words[@]}"))
   IFS=$si
+
   _describe 'values' reply
 }
 
-compdef _yo_completion yo
-###-end-yo-completion-###
+compdef _{pkgname}_completion {pkgname}
+###-end-{pkgname}-completion-###
