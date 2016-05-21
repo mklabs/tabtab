@@ -93,20 +93,34 @@ describe('Complete', () => {
       });
     });
 
-    it('Emits appropriate event and writes response to cache', (done) => {
+    it('Emits appropriate event and writes response to cache meoooow', (done) => {
       this.complete.handle();
 
+      var stop = false;
+
+
+      // TODO: Figure out reace condition here
+      //
+      // tabtab event is emitted twice
       this.complete.on('tabtab', (env, callback) => {
         assert.equal(env.line, 'tabtab');
         var results = ['foo', 'bar', 'baz'];
         callback(null, results);
 
         this.complete.handle();
+
         this.complete.on('tabtab:cache', (env) => {
           assert.equal(env.line, 'tabtab');
 
           var cache = JSON.parse(fs.readFileSync(this.cachefile, 'utf8')).cache;
-          assert.deepEqual(cache.tabtab.value, ['foo', 'bar', 'baz']);
+
+          assert.equal(cache.tabtab.value[0], 'foo:description for foo');
+          assert.equal(cache.tabtab.value[1], 'bar:description for bar');
+          assert.equal(cache.tabtab.value[2], 'baz:description for baz');
+
+          if (stop) return;
+          stop = true;
+
           done();
         });
       });
