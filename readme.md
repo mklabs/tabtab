@@ -204,6 +204,20 @@ should do:
 ![zsh](./docs/img/zsh-install.png)
 ![fish](./docs/img/fish-install.png)
 
+#### tabtab install --auto
+
+The `--auto` flag can be used to bypass prompts and use the SHELL configuration file options by default:
+
+- bash: Will use `~/.bashrc`
+- zsh: Will use `~/.zshrc`
+- bash: Will use `~/.config/fish/config.fish`
+
+This way, you can silently install / uninstall completion for a specific command without asking user to do so.
+
+### tabtab uninstall --auto
+
+The uninstall command can be used to undo what has been done by `tabtab install --auto` command.
+
 ### Completion description
 
 > todo: zsh / fish offers the ability to define description with each
