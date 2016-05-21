@@ -2,11 +2,6 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-<a name="1.4.1"></a>
-## [1.4.1](https://github.com/mklabs/node-tabtab/compare/v1.4.0...v1.4.1) (2016-05-21)
-
-
-
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/mklabs/node-tabtab/compare/v1.3.0...v1.4.0) (2016-05-21)
 
@@ -14,6 +9,10 @@ All notable changes to this project will be documented in this file. See [standa
 ### Bug Fixes
 
 * **completion:** gather results and write only once to STDOUT ([b928bc9](https://github.com/mklabs/node-tabtab/commit/b928bc9))
+* **babel:** add plugin default transform
+* **feature:** Implement uninstall command and --auto flag
+* **fix:** bash completion handling
+* **zsh:** check for compdef
 
 
 ### Features
