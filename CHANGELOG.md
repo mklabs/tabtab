@@ -2,14 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.4.1"></a>
+## [1.4.1](https://github.com/mklabs/node-tabtab/compare/v1.4.0...v1.4.1) (2016-05-21)
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/mklabs/node-tabtab/compare/v1.3.0...v1.4.0) (2016-05-21)
 
 
 ### Bug Fixes
 
-* **bash:** Silently fail if pkg-config bash-completion exists with non 0 ([0765749](https://github.com/mklabs/node-tabtab/commit/0765749))
-* Skip completion install for win32 platform or unknown shell ([c4f6073](https://github.com/mklabs/node-tabtab/commit/c4f6073))
 * **completion:** gather results and write only once to STDOUT ([b928bc9](https://github.com/mklabs/node-tabtab/commit/b928bc9))
 
 
