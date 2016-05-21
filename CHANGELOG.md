@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/mklabs/node-tabtab/compare/v1.3.0...v1.4.0) (2016-05-21)
+
+
+### Bug Fixes
+
+* **bash:** Silently fail if pkg-config bash-completion exists with non 0 ([0765749](https://github.com/mklabs/node-tabtab/commit/0765749))
+* Skip completion install for win32 platform or unknown shell ([c4f6073](https://github.com/mklabs/node-tabtab/commit/c4f6073))
+* **completion:** gather results and write only once to STDOUT ([b928bc9](https://github.com/mklabs/node-tabtab/commit/b928bc9))
+
+
+### Features
+
+* **debug:** automatically JSON.stringify non string objects ([e4423f8](https://github.com/mklabs/node-tabtab/commit/e4423f8))
+* **description:** Handle zsh description using _describe fn ([6de7ca1](https://github.com/mklabs/node-tabtab/commit/6de7ca1)), closes [#19](https://github.com/mklabs/node-tabtab/issues/19) [#21](https://github.com/mklabs/node-tabtab/issues/21)
+* **uninstall:** Implement uninstall command and --auto flag ([de37993](https://github.com/mklabs/node-tabtab/commit/de37993))
+
+
+
 <a name="1.3.2"></a>
 ## [1.3.2](https://github.com/mklabs/node-tabtab/compare/v1.3.0...v1.3.2) (2016-05-09)
 
