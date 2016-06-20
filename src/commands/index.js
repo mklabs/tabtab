@@ -66,12 +66,8 @@ var Commands = function () {
       options = options || {};
       var script = this.complete.script(this.name, this.name || 'tabtab');
 
-      if (process.platform === 'win32') {
-        return debug('Windows shell completion not yet supported, skipping completion install');
-      }
-
       var shell = process.env.SHELL;
-      if (shell) shell = shell.split('/').slice(-1)[0];
+      if (shell) shell = shell.split(process.platform !== 'win32' ? '/' : '\\').slice(-1)[0];
       if (!this.installer[shell]) {
         return debug('User shell %s not supported, skipping completion install', shell);
       }
