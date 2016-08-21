@@ -131,6 +131,9 @@ var Installer = function () {
       var name = this.options.name;
       var script = this.complete.script(name, this.options.completer || name, this.template);
       var filename = _path2.default.join(__dirname, '../.completions', name + '.' + this.template);
+      if (process.platform === 'win32') {
+        filename = filename.replace(/\\/g, '/');
+      } // win32: replace backslashes with forward slashes
       debug('Writing actual completion script to %s', filename);
 
       // First write internal completion script in a local .comletions directory
@@ -237,7 +240,7 @@ var Installer = function () {
 
       return new Promise(function (r, errback) {
         var shell = process.env.SHELL;
-        if (shell) shell = shell.split('/').slice(-1)[0];
+        if (shell) shell = shell.split(process.platform !== 'win32' ? '/' : '\\').slice(-1)[0];
 
         return _this4[shell]().then(r).catch(errback);
       });
