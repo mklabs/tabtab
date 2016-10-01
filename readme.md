@@ -135,6 +135,10 @@ require('tabtab')().start();
 
 ## Completions
 
+For any installation method described below, be sure to reload your current
+shell configuration file by sourcing it (ex. for bash: `source ~/.bashrc`), or
+opening a new shell.
+
 ### Manual Installation
 
 Manually loading the completion for your cli app is done very much [like npm
