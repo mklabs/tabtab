@@ -152,7 +152,6 @@ var Installer = function () {
 
             console.error('\n[tabtab] Adding source line to load %s\nin %s\n', filename, destination);
 
-            out.write('\n');
             debug('. %s > %s', filename, destination);
             out.write('\n# tabtab source for ' + name + ' package');
             out.write('\n# uninstall by removing these lines or running ');
@@ -184,8 +183,7 @@ var Installer = function () {
 
         debug('Uninstall', _this3.options);
         var name = _this3.options.name;
-        var reg = new RegExp('(tabtab source for ' + name + ' package|`tabtab uninstall ' + name + '`|node-tabtab/.completions/' + name + '.' + _this3.template + ')');
-        debug('reg', reg);
+        var reg = new RegExp('(tabtab source for ' + name + ' package|`tabtab uninstall ' + name + '`|tabtab/.completions/' + name + ')');
         lines = lines.filter(function (line) {
           return !reg.test(line);
         });
