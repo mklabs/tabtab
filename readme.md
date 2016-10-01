@@ -52,8 +52,12 @@ node's land.
 You can add completion pretty easily in your node cli script:
 
 ```js
+#! /usr/bin/env node
+
 // Ex. bin/ entry point for a "program" package
-var tab = require('tabtab')();
+var tab = require('tabtab')({
+  name: 'program'
+});
 
 // General handler. Gets called on `program <tab>` and `program stuff ... <tab>`
 tab.on('program', function(data, done) {
@@ -91,7 +95,7 @@ completion:
 #### Options
 
 ```js
-new Complete({
+var tab = require('tabtab')({
   // the String package name being completed, defaults to process.title
   // (if not node default) or will attempt to determine parent's
   // package.json location and extract the name from it.
