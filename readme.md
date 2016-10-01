@@ -36,6 +36,7 @@ node's land.
     * [Yeoman](#yeoman)
 * [CLI](#cli)
   * [tabtab install](#tabtab-install)
+  * [tabtab uninstall](#tabtab-uninstall)
 * [Credits](#credits)
 
 <!-- toc stop -->
@@ -340,23 +341,19 @@ tabtab(1) - manage and discover completion on the user system.
 it provides utilities for installing a completion file, to discover and
 enable additional completion etc.
 
-
     $ tabtab <command> [options]
 
-    options:
-      -h, --help              show this help output
-      -v, --version           show package version
+    Options:
+      -h, --help              Show this help output
+      -v, --version           Show package version
+      --name                  Binary name being completed
+      --auto                  Use default SHELL configuration file
+                              (~/.bashrc, ~/.zshrc or ~/.config/fish/config.fish)
 
-    commands:
+    Commands:
 
-      install                 install and enable completion file on user system
-
-<!--- uninstall               undo the install command --->
-<!--- list                    list the completion files managed by tabtab --->
-<!--- search                  search npm registry for tabtab completion files / dictionaries --->
-<!--- add                     install additional completion files / dictionaries --->
-<!--- rm/remove               uninstall completion file / dictionnary --->
-
+      install                 Install and enable completion file on user system
+      uninstall               Undo the install command (only works with --auto)
 
 ### tabtab install
 
@@ -374,16 +371,18 @@ can be used to delegate the completion to another program. ex.
 
     $ tabtab install --name bower --completer bower-complete
 
-<!--- ### tabtab uninstall --->
-<!---  --->
-<!---     $ tabtab uninstall foobar --->
-<!---  --->
-<!--- attemps to uninstall a previous tabtab install. `tabtab install` adds an entry --->
-<!--- to an internal registry of completions, to be able to undo the operation on --->
-<!--- uninstall. --->
-
 `tabtab install` is not meant to be run directly, but rather used with your
 `package.json` scripts.
+
+### tabtab uninstall
+
+    $ tabtab uninstall --name binary-name
+
+attemps to uninstall a previous tabtab install by removing lines added by
+`tabtab install` in the SHELL specific config file (~/.bashrc, ~/.zshrc or
+~/.config/fish/config.fish).
+
+Only works with `--auto` flag.
 
 ## credits
 
