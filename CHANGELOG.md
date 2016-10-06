@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/mklabs/node-tabtab/compare/v2.0.0...v2.0.1) (2016-10-06)
+
+
+### Bug Fixes
+
+* have uninstall command working as expected by fixing regexp ([21e2de6](https://github.com/mklabs/node-tabtab/commit/21e2de6))
+
+
+
 <a name="1.4.2"></a>
 ## [1.4.2](https://github.com/mklabs/node-tabtab/compare/v1.4.1...v1.4.2) (2016-05-21)
 

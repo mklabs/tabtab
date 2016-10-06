@@ -7,7 +7,7 @@
   "scripts": {
     "test": "SHELL=zsh babel-node ./node_modules/.bin/mocha test",
     "babel": "babel lib/ -d src/",
-    "changelog": "npm run semantic",
+    "changelog": "standard-version -m '%s'",
     "prepublish": "npm run babel",
     "pretest": "npm run babel",
     "release": "standard-version -m '%s' && git push origin master --tags && npm publish"
@@ -45,5 +45,5 @@
     "npmlog": "^2.0.3",
     "object-assign": "^4.1.0"
   },
-  "version": "2.0.0"
+  "version": "2.0.1"
 }
