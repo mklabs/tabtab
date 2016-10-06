@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.2"></a>
+## [2.0.2](https://github.com/mklabs/node-tabtab/compare/v2.0.1...v2.0.2) (2016-10-06)
+
+
+### Bug Fixes
+
+* have output done after recv to handle async completion handler ([d8596ed](https://github.com/mklabs/node-tabtab/commit/d8596ed))
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://github.com/mklabs/node-tabtab/compare/v2.0.0...v2.0.1) (2016-10-06)
 
