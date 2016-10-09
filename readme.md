@@ -24,12 +24,12 @@ node's land.
 * [Install](#install)
 * [Documentation](#documentation)
   * [API](#api)
+  * [Completion description](#completion-description)
   * [package.json](#packagejson)
 * [Completions](#completions)
   * [Manual Installation](#manual-installation)
   * [Automatic Installation](#automatic-installation)
     * [npm script:install](#npm-scriptinstall)
-  * [Completion description](#completion-description)
   * [Completion for other programs](#completion-for-other-programs)
     * [nvm](#nvm)
     * [Bower](#bower)
@@ -111,6 +111,21 @@ var tab = require('tabtab')({
 
 Completion results are cached by default, for a duration of 5 minutes. Caching
 is based on the value of the full command being completed (`data.line`).
+
+### Completion description
+
+Only supported with ZSH, tabtab offers the ability to define per command / options description by adding them preceded by a colon, in the form of:
+
+```js
+'command:description for command'
+````
+
+This way, you can define descriptions for a specific completion item and tabtab will configure ZSH to show them right to the completion item.
+
+```shell
+$ program <tab>
+command     - description for command
+````
 
 ### package.json
 
@@ -226,13 +241,6 @@ This way, you can silently install / uninstall completion for a specific command
 ### tabtab uninstall --auto
 
 The uninstall command can be used to undo what has been done by `tabtab install --auto` command.
-
-### Completion description
-
-> todo: zsh / fish offers the ability to define description with each
-> completion item, implemented with fish, have to adjust the same pattern to
-> zsh.
-
 
 ### Completion for other programs
 
