@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/mklabs/node-tabtab/compare/v2.0.2...v2.1.0) (2016-10-09)
+
+
+### Bug Fixes
+
+* **fish:** Disable description in fish completion per command / options ([1f04613](https://github.com/mklabs/node-tabtab/commit/1f04613))
+* **fish:** fix COMP_LINE by appending a space so that prev is correctly positioned ([861f8ef](https://github.com/mklabs/node-tabtab/commit/861f8ef))
+
+
+### Features
+
+* **fish:** prevent filenames from being completed ([282b941](https://github.com/mklabs/node-tabtab/commit/282b941))
+
+
+
 <a name="2.0.2"></a>
 ## [2.0.2](https://github.com/mklabs/node-tabtab/compare/v2.0.1...v2.0.2) (2016-10-06)
 
