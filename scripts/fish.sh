@@ -2,7 +2,7 @@
 function _{pkgname}_completion
   set cmd (commandline -opc)
   set cursor (commandline -C)
-  set completions (eval env DEBUG=\"" \"" COMP_CWORD=\""$cmd\"" COMP_LINE=\""$cmd\"" COMP_POINT=\""$cursor\"" {completer} completion --json)
+  set completions (eval env DEBUG=\"" \"" COMP_CWORD=\""$cmd\"" COMP_LINE=\""$cmd \"" COMP_POINT=\""$cursor\"" {completer} completion -- $cmd)
 
   for completion in $completions
     set cmd "node -e \"var parts = '$completion'.split(':'); console.log(parts.slice(0, -1).join(':')); console.log(parts.slice(-1)[0]);\""
