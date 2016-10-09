@@ -9,5 +9,5 @@ function _{pkgname}_completion
   end
 end
 
-complete -d '{pkgname}' -c {pkgname} -a "(eval _{pkgname}_completion)"
+complete -f -d '{pkgname}' -c {pkgname} -a "(eval _{pkgname}_completion)"
 ###-end-{pkgname}-completion-###
