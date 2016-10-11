@@ -93,7 +93,7 @@ describe('Complete', () => {
       });
     });
 
-    it('Emits appropriate event and writes response to cache meoooow', (done) => {
+    it('Emits appropriate event and writes response to cache', (done) => {
       this.complete.handle();
 
       var stop = false;
@@ -104,7 +104,7 @@ describe('Complete', () => {
       // tabtab event is emitted twice
       this.complete.on('tabtab', (env, callback) => {
         assert.equal(env.line, 'tabtab');
-        var results = ['foo', 'bar', 'baz'];
+        var results = ['foo:description for foo', 'bar:description for bar', 'baz:description for baz'];
         callback(null, results);
 
         this.complete.handle();
