@@ -114,18 +114,27 @@ is based on the value of the full command being completed (`data.line`).
 
 ### Completion description
 
-Only supported with ZSH, tabtab offers the ability to define per command / options description by adding them preceded by a colon, in the form of:
+Only supported with zsh or fish, tabtab offers the ability to define per command / options description by adding them preceded by a colon, in the form of:
 
 ```js
 'command:description for command'
 ````
 
-This way, you can define descriptions for a specific completion item and tabtab will configure ZSH to show them right to the completion item.
+This way, you can define descriptions for a specific completion item and tabtab will configure zsh / fish to show them right to the completion item.
+
+Example for zsh
 
 ```shell
 $ program <tab>
 command     - description for command
 ````
+
+Example for fish
+
+```fish
+$ program <tab>
+command     (description for command)
+```
 
 ### package.json
 
