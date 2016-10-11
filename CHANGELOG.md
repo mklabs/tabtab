@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.2.0"></a>
+# [2.2.0](https://github.com/mklabs/node-tabtab/compare/v2.1.1...v2.2.0) (2016-10-11)
+
+
+### Features
+
+* **fish:** handle description by adding a tab character between name and description ([9290dcc](https://github.com/mklabs/node-tabtab/commit/9290dcc))
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/mklabs/node-tabtab/compare/v2.1.0...v2.1.1) (2016-10-09)
 
