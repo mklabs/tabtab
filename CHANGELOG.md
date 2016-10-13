@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.2.1"></a>
+## [2.2.1](https://github.com/mklabs/node-tabtab/compare/v2.2.0...v2.2.1) (2016-10-13)
+
+
+### Bug Fixes
+
+* create duplicate-free version of completion items accross evt listeners ([dc8b587](https://github.com/mklabs/node-tabtab/commit/dc8b587))
+
+
+
 <a name="2.2.0"></a>
 # [2.2.0](https://github.com/mklabs/node-tabtab/compare/v2.1.1...v2.2.0) (2016-10-11)
 
