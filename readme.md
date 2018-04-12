@@ -243,7 +243,7 @@ The `--auto` flag can be used to bypass prompts and use the SHELL configuration 
 
 - bash: Will use `~/.bashrc`
 - zsh: Will use `~/.zshrc`
-- bash: Will use `~/.config/fish/config.fish`
+- fish: Will use `~/.config/fish/config.fish`
 
 This way, you can silently install / uninstall completion for a specific command without asking user to do so.
 
