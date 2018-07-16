@@ -7,7 +7,10 @@
   "scripts": {
     "test": "mocha"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  },
   "license": "MIT",
   "keywords": [
     "terminal",
@@ -32,7 +35,6 @@
     "mkdirp": "^0.5.1",
     "mocha": "^5.2.0",
     "object-assign": "^4.1.1",
-    "reactify": "^1.1.1",
     "untildify": "^3.0.3",
     "user-home": "^2.0.0"
   },
