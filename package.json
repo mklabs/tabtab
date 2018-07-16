@@ -4,12 +4,23 @@
   "description": "tab completion helpers, for node cli programs. Inspired by npm completion.",
   "bin": "bin/tabtab",
   "main": "index.js",
+  "watch": {
+    "babel": "lib/**/*.js"
+  },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha test/complete.js",
+    "babel": "babel lib/ -d src/",
+    "changelog": "standard-version -m '%s'",
+    "prepublish": "npm run babel",
+    "pretest": "npm run babel",
+    "release": "standard-version -m '%s' && git push origin master --tags && npm publish",
+    "watch": "npm-watch"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0"
+    "babel-preset-env": "^1.7.0",
+    "mocha": "^5.2.0",
+    "npm-watch": "^0.3.0"
   },
   "license": "MIT",
   "keywords": [
@@ -33,7 +44,6 @@
     "lodash.uniq": "^4.5.0",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
-    "mocha": "^5.2.0",
     "object-assign": "^4.1.1",
     "untildify": "^3.0.3",
     "user-home": "^2.0.0"
