@@ -18,7 +18,7 @@ describe('Complete', () => {
 
   it('Complete#parseEnv', () => {
     var env = this.complete.parseEnv();
-    assert.ok(env.args && env.args.length);
+    assert.strictEqual(env.args.length, 0);
     assert.ok(!env.complete);
     assert.strictEqual(env.words, 0);
     assert.strictEqual(env.point, 0);

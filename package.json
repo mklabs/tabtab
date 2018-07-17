@@ -3,9 +3,9 @@
   "name": "tabtab",
   "description": "tab completion helpers, for node cli programs. Inspired by npm completion.",
   "bin": "bin/tabtab",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "nyc mocha test/complete.js",
+    "test": "nyc mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
