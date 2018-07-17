@@ -1,6 +1,6 @@
 const fs       = require('fs');
 const path     = require('path');
-const Complete = require('../src/complete');
+const Complete = require('../lib/complete');
 const assert   = require('assert');
 
 describe('Complete', () => {
