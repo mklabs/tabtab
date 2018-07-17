@@ -5,7 +5,7 @@
   "bin": "bin/tabtab",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "nyc mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
