@@ -6,8 +6,10 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc mocha test/complete.js"
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
+    "coveralls": "^3.0.2",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2"
   },
