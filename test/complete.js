@@ -2,6 +2,7 @@ const fs       = require('fs');
 const path     = require('path');
 const Complete = require('../lib/complete');
 const assert   = require('assert');
+const debug    = require('debug')('tabtab:test:complete');
 
 describe('Complete', () => {
 
@@ -37,18 +38,19 @@ describe('Complete', () => {
 
   describe('Complete#handle', () => {
     it('Emits appropriate event', (done) => {
-      this.complete.on('tabtab', (data, callback) => {
-        assert.equal(data.line, 'tabtab');
-        callback(null, ['foo', 'bar']);
+      this.complete.on('someProgram foo', (data, callback) => {
+        assert.equal(data.line, 'someProgram foo ');
+        debug('Sending results from test foo and bar');
+        callback(null, ['--foo', '--bar']);
         done();
       });
 
       this.complete.handle({
-        _: ['completion', '--', 'tabtab'],
+        _: ['completion', '--', 'someProgram'],
         env: {
-          COMP_LINE: 'tabtab',
+          COMP_LINE: 'someProgram foo ',
           COMP_CWORD: 1,
-          COMP_POINT: 6
+          COMP_POINT: 7
         }
       });
     });

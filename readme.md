@@ -9,10 +9,12 @@ Made possible using the same technique as npm (whose completion is quite
 awesome) relying on a shell script bridge to do the actual completion from
 node's land.
 
-**Warning**
+**Warning / Breaking changes**
 
 - Windows is not supported
 - Cache has been removed
+- tabtab now emits the whole line (ex. program foobar) instead of emitting
+  several events at once (program and foobar).
 
 ---
 
