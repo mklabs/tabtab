@@ -5,13 +5,14 @@
   "bin": "bin/tabtab",
   "main": "lib/index.js",
   "scripts": {
-    "test": "nyc mocha",
+    "test": "mocha",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
     "coveralls": "^3.0.2",
     "mocha": "^5.2.0",
-    "nyc": "^12.0.2"
+    "nyc": "^12.0.2",
+    "gentle-cli": "^1.0.3"
   },
   "license": "MIT",
   "keywords": [
@@ -28,13 +29,11 @@
   },
   "dependencies": {
     "debug": "^2.6.9",
-    "gentle-cli": "^1.0.3",
     "inquirer": "^1.0.2",
     "lodash.difference": "^4.5.0",
     "lodash.uniq": "^4.5.0",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
-    "object-assign": "^4.1.1",
     "untildify": "^3.0.3",
     "user-home": "^2.0.0"
   },

@@ -7,8 +7,7 @@ describe('Complete', () => {
 
   beforeEach(() => {
     this.complete = new Complete({
-      name: 'tabtab',
-      cache: false
+      name: 'tabtab'
     });
   });
 
@@ -17,15 +16,9 @@ describe('Complete', () => {
   });
 
   it('Complete#parseEnv', () => {
-    var env = this.complete.parseEnv();
-    assert.strictEqual(env.args.length, 0);
-    assert.ok(!env.complete);
-    assert.strictEqual(env.words, 0);
-    assert.strictEqual(env.point, 0);
-    assert.strictEqual(env.line, '');
-
-    env = this.complete.parseEnv({
+    const env = this.complete.parseEnv({
       env: {
+        // Passing here numbers as String to mimick console behavior
         COMP_CWORD: '3',
         COMP_POINT: '5',
         COMP_LINE: 'foo bar --foobar'
@@ -42,113 +35,22 @@ describe('Complete', () => {
     assert.equal(env.prev, 'bar');
   });
 
-  describe('Complete#handle cache off', () => {
+  describe('Complete#handle', () => {
     it('Emits appropriate event', (done) => {
-      this.complete.handle({
-        _: ['completion', '--', 'tabtab'],
-        cache: false,
-        env: {
-          COMP_LINE: 'tabtab',
-          COMP_CWORD: 'tabtab',
-          COMP_POINT: 0
-        }
-      });
-
-
       this.complete.on('tabtab', (data, callback) => {
         assert.equal(data.line, 'tabtab');
         callback(null, ['foo', 'bar']);
         done();
       });
-    });
-  });
 
-  describe.skip('Complete#handle cache on', () => {
-    beforeEach((done) => {
-      this.cachefile = path.join(__dirname, '../.completions/cache.json');
-
-      let next = (err) => {
-        if (err) return done(err);
-
-        this.complete = new Complete({
-          name: 'tabtab',
-          _: ['completion', '--', 'tabtab'],
-          env: {
-            COMP_LINE: 'tabtab',
-            COMP_CWORD: 'tabtab',
-            COMP_POINT: 0
-          },
-
-          ttl: 100
-        });
-
-        done();
-      }
-
-      fs.stat(this.cachefile, (err, stats) => {
-        if (err && err.code === 'ENOENT') return next();
-        else if (err) return next(err);
-
-        fs.unlink(this.cachefile, next);
-      });
-    });
-
-    it('Emits appropriate event and writes response to cache', (done) => {
-      this.complete.handle();
-
-      var stop = false;
-
-
-      // TODO: Figure out reace condition here
-      //
-      // tabtab event is emitted twice
-      this.complete.on('tabtab', (env, callback) => {
-        assert.equal(env.line, 'tabtab');
-        var results = ['foo:description for foo', 'bar:description for bar', 'baz:description for baz'];
-        callback(null, results);
-
-        this.complete.handle();
-
-        this.complete.on('tabtab:cache', (env) => {
-          assert.equal(env.line, 'tabtab');
-
-          var cache = JSON.parse(fs.readFileSync(this.cachefile, 'utf8')).cache;
-
-          assert.equal(cache.tabtab.value[0], 'foo:description for foo');
-          assert.equal(cache.tabtab.value[1], 'bar:description for bar');
-          assert.equal(cache.tabtab.value[2], 'baz:description for baz');
-
-          if (stop) return;
-          stop = true;
-
-          done();
-        });
-      });
-    });
-
-    describe('TTL duration', () => {
-      it('Honors TTL duration', (done) => {
-        this.complete.handle();
-
-        this.complete.on('tabtab', (env, callback) => {
-          assert.equal(env.line, 'tabtab');
-          var results = ['foo', 'bar', 'baz'];
-          callback(null, results);
-
-          setTimeout(() => {
-            this.complete.handle();
-            this.complete.on('tabtab:cache', (env) => {
-              assert.equal(env.line, 'tabtab');
-
-              var cache = JSON.parse(fs.readFileSync(this.cachefile, 'utf8')).cache;
-              assert.ok(!cache.tabtab);
-              done();
-            });
-          }, 300);
-        });
+      this.complete.handle({
+        _: ['completion', '--', 'tabtab'],
+        env: {
+          COMP_LINE: 'tabtab',
+          COMP_CWORD: 1,
+          COMP_POINT: 6
+        }
       });
     });
   });
-
-
 });

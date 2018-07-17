@@ -9,7 +9,10 @@ Made possible using the same technique as npm (whose completion is quite
 awesome) relying on a shell script bridge to do the actual completion from
 node's land.
 
-**Warning** Windows is not supported
+**Warning**
+
+- Windows is not supported
+- Cache has been removed
 
 ---
 
