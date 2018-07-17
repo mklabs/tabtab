@@ -5,7 +5,7 @@
   "bin": "bin/tabtab",
   "main": "lib/index.js",
   "scripts": {
-    "test": "nyc mocha",
+    "test": "nyc mocha --timeout 5000",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
