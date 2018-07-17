@@ -5,7 +5,7 @@
   "bin": "bin/tabtab",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha test/complete.js"
+    "test": "nyc mocha test/complete.js",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "devDependencies": {
