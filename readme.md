@@ -1,11 +1,15 @@
-# tabtab [![Build Status](https://secure.travis-ci.org/mklabs/node-tabtab.png)](http://travis-ci.org/mklabs/node-tabtab)
+# tabtab
 
-A node package to do some custom command line`<tab><tab>` completion for any
+[![Build Status](https://travis-ci.org/mklabs/tabtab.svg?branch=master)](https://travis-ci.org/mklabs/tabtab)
+
+A node package to do some custom command line `<tab><tab>` completion for any
 system command, for Bash, Zsh, and Fish shells.
 
 Made possible using the same technique as npm (whose completion is quite
 awesome) relying on a shell script bridge to do the actual completion from
 node's land.
+
+**Warning** Windows is not supported
 
 ---
 
