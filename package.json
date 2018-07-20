@@ -4,8 +4,8 @@
   "description": "tab completion helpers, for node cli programs. Inspired by npm completion.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "NODE_ENV=test nyc mocha -r babel-core/register -r babel-polyfill --timeout 5000",
-    "mocha": "NODE_ENV=test mocha -r babel-core/register -r babel-polyfill --timeout 5000",
+    "test": "mocha -r babel-core/register -r babel-polyfill --timeout 5000",
+    "mocha": "mocha -r babel-core/register -r babel-polyfill --timeout 5000",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "watch": "npm-watch"
   },
@@ -13,14 +13,14 @@
     "test": "{lib,test}/**/*.js"
   },
   "devDependencies": {
-    "coveralls": "^3.0.2",
-    "mocha": "^5.2.0",
-    "npm-watch": "^0.3.0",
-    "nyc": "^12.0.2",
     "babel-core": "^6.26.3",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
-    "inquirer-test": "^2.0.1"
+    "coveralls": "^3.0.2",
+    "inquirer-test": "^2.0.1",
+    "mocha": "^5.2.0",
+    "npm-watch": "^0.3.0",
+    "nyc": "^12.0.2"
   },
   "license": "MIT",
   "keywords": [
@@ -42,5 +42,5 @@
     "minimist": "^1.2.0",
     "untildify": "^3.0.3"
   },
-  "version": "2.2.2"
+  "version": "3.0.0-alpha"
 }

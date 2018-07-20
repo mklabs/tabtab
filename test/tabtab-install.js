@@ -44,7 +44,6 @@ describe('tabtab.install()', () => {
     const result = await run([cliPath], [ENTER, 'n', ENTER, '/tmp/foo', ENTER], TIMEOUT);
     debug('Test result', result);
 
-    // assert.ok(/Which\sshell\sdo\syou\suse\s\?\sbash/.test(result));
     assert.ok(/Which Shell do you use \? bash/.test(result));
     assert.ok(/We will install completion to ~\/\.bashrc, is it ok \?/.test(result));
     assert.ok(/Which path then \? Must be absolute/.test(result));
