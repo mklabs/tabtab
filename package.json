@@ -7,7 +7,8 @@
     "test": "nyc mocha --timeout 5000",
     "mocha": "mocha --timeout 5000",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "watch": "npm-watch"
+    "watch": "npm-watch",
+    "prettier": "prettier '{lib,test}/**/*.js'"
   },
   "watch": {
     "test": "{lib,test}/**/*.js"
@@ -17,7 +18,8 @@
     "inquirer-test": "^2.0.1",
     "mocha": "^5.2.0",
     "npm-watch": "^0.3.0",
-    "nyc": "^12.0.2"
+    "nyc": "^12.0.2",
+    "prettier": "^1.13.7"
   },
   "license": "MIT",
   "keywords": [

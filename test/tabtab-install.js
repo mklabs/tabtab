@@ -36,24 +36,21 @@ describe("tabtab.install()", () => {
   it("asks about shell (bash)", () => {
     const cliPath = path.join(__dirname, "fixtures/tabtab-install.js");
 
-    return run(
-      [cliPath],
-      [ENTER, "n", ENTER, "/tmp/foo", ENTER],
-      TIMEOUT
-    )
-    .then(result => {
-      debug("Test result", result);
+    return run([cliPath], [ENTER, "n", ENTER, "/tmp/foo", ENTER], TIMEOUT).then(
+      result => {
+        debug("Test result", result);
 
-      assert.ok(/Which Shell do you use \? bash/.test(result));
-      assert.ok(
-        /We will install completion to ~\/\.bashrc, is it ok \?/.test(result)
-      );
-      assert.ok(/Which path then \? Must be absolute/.test(result));
-      assert.ok(/Very well, we will install using \/tmp\/foo/.test(result));
-      assert.ok(
-        /Result \{ location: '\/tmp\/foo', shell: 'bash' \}/.test(result)
-      );
-    });
+        assert.ok(/Which Shell do you use \? bash/.test(result));
+        assert.ok(
+          /We will install completion to ~\/\.bashrc, is it ok \?/.test(result)
+        );
+        assert.ok(/Which path then \? Must be absolute/.test(result));
+        assert.ok(/Very well, we will install using \/tmp\/foo/.test(result));
+        assert.ok(
+          /Result \{ location: '\/tmp\/foo', shell: 'bash' \}/.test(result)
+        );
+      }
+    );
 
     return Promise.resolve();
   });
