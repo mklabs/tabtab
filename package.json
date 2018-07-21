@@ -8,7 +8,8 @@
     "mocha": "DEBUG='tabtab*' mocha --timeout 5000",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "watch": "npm-watch",
-    "prettier": "prettier -l '{lib,test}/**/*.js'"
+    "prettier": "prettier -l '{lib,test}/**/*.js'",
+    "quick-test": "DEBUG='tabtab*' node test/fixtures/installer-install.js"
   },
   "watch": {
     "test": "{lib,test}/**/*.js"
