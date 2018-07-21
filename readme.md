@@ -22,7 +22,7 @@ node's land.
 Simplify everything, major overhaul, rewrite from scratch.
 
 Functional, less abstraction, clearer documentation, good test coverage,
-support for node 6/8/10 without babel (except in tests).
+support for node 6/8/10 without babel.
 
 Up to date dependencies, easier to debug, easier to test.
 
