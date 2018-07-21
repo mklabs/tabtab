@@ -22,7 +22,8 @@ node's land.
 Simplify everything, major overhaul, rewrite from scratch.
 
 Functional, less abstraction, clearer documentation, good test coverage,
-support for node 6/8/10 without babel.
+support for node 6/8/10 without babel. (*Note* have issues with node 6 on
+Travis, disabled for now).
 
 Up to date dependencies, easier to debug, easier to test.
 
