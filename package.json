@@ -4,11 +4,11 @@
   "description": "tab completion helpers, for node cli programs. Inspired by npm completion.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "nyc mocha --timeout 5000",
-    "mocha": "mocha --timeout 5000",
+    "test": "DEBUG='tabtab*' nyc mocha --timeout 5000",
+    "mocha": "DEBUG='tabtab*' mocha --timeout 5000",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "watch": "npm-watch",
-    "prettier": "prettier '{lib,test}/**/*.js'"
+    "prettier": "prettier -l '{lib,test}/**/*.js'"
   },
   "watch": {
     "test": "{lib,test}/**/*.js"
