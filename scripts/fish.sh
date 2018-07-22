@@ -1,8 +1,10 @@
 ###-begin-{pkgname}-completion-###
 function _{pkgname}_completion
-  set cmd (commandline -opc)
+  set cmd (commandline -o)
   set cursor (commandline -C)
-  set completions (eval env DEBUG=\"" \"" COMP_CWORD=\""$cmd\"" COMP_LINE=\""$cmd \"" COMP_POINT=\""$cursor\"" {completer} completion -- $cmd)
+  set words (node -pe "'$cmd'.split(' ').length")
+
+  set completions (eval env DEBUG=\"" \"" COMP_CWORD=\""$words\"" COMP_LINE=\""$cmd \"" COMP_POINT=\""$cursor\"" {completer} completion -- $cmd)
 
   for completion in $completions
     echo -e $completion

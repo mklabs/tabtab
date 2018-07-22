@@ -9,7 +9,8 @@
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "watch": "npm-watch",
     "prettier": "prettier -l '{lib,test}/**/*.js'",
-    "quick-test": "DEBUG='tabtab*' node test/fixtures/installer-install.js"
+    "quick-test": "DEBUG='tabtab*' node test/fixtures/installer-install.js",
+    "bash-quick-test": "DEBUG=tabtab* COMP_CWORD='2' COMP_LINE='tabtab foo' COMP_POINT='10' tabtab completion -- tabtab foo"
   },
   "watch": {
     "test": "{lib,test}/**/*.js"

@@ -1,8 +1,9 @@
+// This file is just there to test out completion
 const tabtab = require('../..');
 
 (async () => {
   const result = await tabtab.install({
-    name: 'foo',
-    completer: 'foo-complete'
+    name: 'tabtab',
+    completer: 'tabtab'
   });
 })();
