@@ -21,8 +21,8 @@ run `SHELL=zsh` to set the environment accordingly so that tabtab understands
 the current shell used is actually zsh.
 
 Similarly, to test against **fish**, make sure to have fish installed, and then
-the same steps to reproduce. This time, make sure to type `fish` and run `env
-SHELL=fish`. This is required for tabtab to understand the shell being used is
+the same steps to reproduce. This time, make sure to type `fish` and run `set
+SHELL fish`. This is required for tabtab to understand the shell being used is
 actually fish.
 
 Those steps are not required if testing against your system shell (possibly using `chsh`).
