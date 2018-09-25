@@ -16,7 +16,7 @@ describe('tabtab basic suite', () => {
       COMP_POINT: 12
     });
 
-    const env = tabtab.parseEnv({ _: ['tabtab'] }, environment);
+    const env = tabtab.parseEnv(environment);
 
     const result = tabtab.log(['--foo', '--bar'], env);
     assert.deepEqual(result.args, ['--foo']);
