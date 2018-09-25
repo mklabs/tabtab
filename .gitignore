@@ -3,4 +3,5 @@
 src/
 .completions/
 node_modules/
-.nyc_output/ note.txt
+.nyc_output/
+note.txt
