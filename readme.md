@@ -1,4 +1,4 @@
-# tabtab [![Build Status](https://secure.travis-ci.org/mklabs/node-tabtab.png)](http://travis-ci.org/mklabs/node-tabtab)
+# tabtab [![Build Status](https://travis-ci.org/mklabs/tabtab.svg?branch=master)](https://travis-ci.org/mklabs/tabtab)
 
 A node package to do some custom command line`<tab><tab>` completion for any
 system command, for Bash, Zsh, and Fish shells.
