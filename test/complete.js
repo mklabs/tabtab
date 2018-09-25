@@ -104,7 +104,7 @@ describe('Complete', () => {
       // tabtab event is emitted twice
       this.complete.on('tabtab', (env, callback) => {
         assert.equal(env.line, 'tabtab');
-        var results = ['foo:description for foo', 'bar:description for bar', 'baz:description for baz'];
+        var results = ['foo:description for foo', 'bar:description for bar', 'baz:description for baz', 'foo:http://example.com', 'foo.com'];
         callback(null, results);
 
         this.complete.handle();
@@ -117,6 +117,8 @@ describe('Complete', () => {
           assert.equal(cache.tabtab.value[0], 'foo:description for foo');
           assert.equal(cache.tabtab.value[1], 'bar:description for bar');
           assert.equal(cache.tabtab.value[2], 'baz:description for baz');
+          assert.equal(cache.tabtab.value[3], 'foo:http://example.com');
+          assert.equal(cache.tabtab.value[4], 'foo.com:');
 
           if (stop) return;
           stop = true;
