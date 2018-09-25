@@ -21,9 +21,9 @@
     "coveralls": "^3.0.2",
     "inquirer-test": "^2.0.1",
     "mocha": "^5.2.0",
-    "npm-watch": "^0.3.0",
-    "nyc": "^12.0.2",
-    "prettier": "^1.13.7"
+    "npm-watch": "^0.4.0",
+    "nyc": "^13.0.1",
+    "prettier": "^1.14.3"
   },
   "license": "MIT",
   "keywords": [
@@ -39,7 +39,7 @@
     "url": "https://github.com/mklabs/tabtab.git"
   },
   "dependencies": {
-    "debug": "^3.1.0",
+    "debug": "^4.0.1",
     "es6-promisify": "^6.0.0",
     "inquirer": "^6.0.0",
     "minimist": "^1.2.0",
