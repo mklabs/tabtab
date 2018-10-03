@@ -5,12 +5,13 @@ const debug = require('debug')('tabtab:test:install');
 const untildify = require('untildify');
 const path = require('path');
 const fs = require('fs');
-const { promisify } = require('es6-promisify');
+const { promisify } = require('util');
+
 const readFile = promisify(fs.readFile);
 
 // inquirer-test needs a little bit more time, or my setup
 const TIMEOUT = 500;
-const { UP, DOWN, ENTER } = run;
+const { ENTER } = run;
 
 describe('tabtab.install()', () => {
   it('is a function', () => {
@@ -61,8 +62,6 @@ describe('tabtab.install()', () => {
         assert.ok(/Which path then \? Must be absolute/.test(result));
         assert.ok(/Very well, we will install using \/tmp\/foo/.test(result));
       });
-
-      return Promise.resolve();
     });
 
     it('asks about shell (bash) with default location', () => {
@@ -87,8 +86,6 @@ describe('tabtab.install()', () => {
             )
           );
         });
-
-      return Promise.resolve();
     });
   });
 });

@@ -1,4 +1,4 @@
-const { install, uninstall } = require('../../lib/installer');
+const { install } = require('../../lib/installer');
 
 (async () => {
   await install({

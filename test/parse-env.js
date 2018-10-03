@@ -33,10 +33,7 @@ describe('tabtab.parseEnv()', () => {
   it('parseEnv without COMP stuff', () => {
     const opts = minimist(['foo', 'bar', 'baz']);
 
-    const result = tabtab.parseEnv(
-      opts,
-      Object.assign({}, process.env)
-    );
+    const result = tabtab.parseEnv(Object.assign({}, process.env), opts);
 
     assert.equal(result.complete, false);
   });

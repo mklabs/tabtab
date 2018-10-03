@@ -1,14 +1,14 @@
 const assert = require('assert');
+const fs = require('fs');
+const untildify = require('untildify');
+const { promisify } = require('util');
 const {
   install,
   uninstall,
   writeToShellConfig,
   writeToCompletionScript
 } = require('../lib/installer');
-const fs = require('fs');
-const path = require('path');
-const untildify = require('untildify');
-const { promisify } = require('es6-promisify');
+
 const readFile = promisify(fs.readFile);
 
 describe('installer', () => {
@@ -42,8 +42,8 @@ describe('installer', () => {
       fs.writeFile(untildify('~/.bashrc'), bashrc, done);
     });
 
-    it('installs the necessary line into ~/.bashrc', () => {
-      return install({
+    it('installs the necessary line into ~/.bashrc', () =>
+      install({
         name: 'foo',
         completer: 'foo-complete',
         location: '~/.bashrc'
@@ -57,7 +57,6 @@ describe('installer', () => {
               filecontent
             )
           );
-        });
-    });
+        }));
   });
 });

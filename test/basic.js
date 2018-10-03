@@ -1,6 +1,5 @@
 const tabtab = require('..');
 const assert = require('assert');
-const run = require('inquirer-test');
 
 describe('tabtab basic suite', () => {
   it('returns its name', () => {
@@ -46,10 +45,10 @@ describe('tabtab basic suite', () => {
     shell = tabtab.shell({ SHELL: '/bin/bash' });
     assert.equal(shell, 'bash');
 
-    shell = tabtab.shell({ SHELL: '/usr/bin/zsh'});
+    shell = tabtab.shell({ SHELL: '/usr/bin/zsh' });
     assert.equal(shell, 'zsh');
 
-    shell = tabtab.shell({ SHELL: '/usr/bin/fish'});
+    shell = tabtab.shell({ SHELL: '/usr/bin/fish' });
     assert.equal(shell, 'fish');
   });
 });
