@@ -12,11 +12,13 @@ module.exports = opts;
 const args = opts._;
 
 const completion = env => {
+  if (!env.complete) return;
+
   if (/^--/.test(env.prev)) {
-    return tabtab.log(['--help', '--foo', '--bar'], env);
+    return tabtab.log(['--help', '--foo', '--bar']);
   }
 
-  if (env.prev === 'tabtab') {
+  if (env.prev === 'tabtab-test') {
     return tabtab.log([
       '--help',
       '--version',
@@ -24,7 +26,8 @@ const completion = env => {
       'bar',
       'install-completion',
       'completion',
-      'someCommand',
+      'someCommand:someCommand is a some kind of command with a description',
+      { name: 'someOtherCommand:hey', description: 'You must add a description for items with ":" in them' },
       'anotherOne'
     ]);
   }
@@ -37,10 +40,10 @@ const completion = env => {
     return tabtab.log(['is', 'this', 'just', 'fantasy']);
   }
 
-  return tabtab.log('foo', 'bar');
+  return tabtab.log(['foo', 'bar']);
 };
 
-const init = () => {
+const init = async () => {
   const cmd = args[0];
 
   if (opts.help) {
@@ -59,16 +62,25 @@ const init = () => {
     return console.log('barbar');
   }
 
-  if (cmd === 'install-completion') {
-    return console.log('install completion there');
-  }
-
   if (cmd === 'someCommand') {
     return console.log('is this the real life ?');
   }
 
   if (cmd === 'anotherOne') {
     return console.log('is this just fantasy ?');
+  }
+
+  if (cmd === 'install-completion') {
+    console.log('installing completion there');
+    // Here we install for the program `tabtab-test` (this file), with
+    // completer being the same program. Sometimes, you want to complete
+    // another program that's where the `completer` option might come handy.
+    await tabtab.install({
+      name: 'tabtab-test',
+      completer: 'tabtab-test'
+    });
+    console.log('Installed completion');
+    return;
   }
 
   if (cmd === 'completion') {
