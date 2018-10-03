@@ -1,5 +1,6 @@
 const assert = require('assert');
 const fs = require('fs');
+const path = require('path');
 const untildify = require('untildify');
 const { promisify } = require('util');
 const {
@@ -50,8 +51,22 @@ describe('installer', () => {
       })
         .then(() => readFile(untildify('~/.bashrc'), 'utf8'))
         .then(filecontent => {
-          assert.ok(/tabtab source for foo/.test(filecontent));
+          assert.ok(/tabtab source for completion packages/.test(filecontent));
           assert.ok(/uninstall by removing these lines/.test(filecontent));
+          assert.ok(
+            /\[ -f .+__tabtab.bash ] && \. .+tabtab\/.completions\/__tabtab.bash || true/.test(
+              filecontent
+            )
+          );
+        })
+        .then(() =>
+          readFile(
+            path.join(__dirname, '../.completions/__tabtab.bash'),
+            'utf8'
+          )
+        )
+        .then(filecontent => {
+          assert.ok(/tabtab source for foo/.test(filecontent));
           assert.ok(
             /\[ -f .+foo.bash ] && \. .+tabtab\/.completions\/foo.bash || true/.test(
               filecontent

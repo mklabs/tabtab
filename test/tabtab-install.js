@@ -78,7 +78,7 @@ describe('tabtab.install()', () => {
         })
         .then(() => readFile(untildify('~/.bashrc'), 'utf8'))
         .then(filecontent => {
-          assert.ok(/tabtab source for foo/.test(filecontent));
+          assert.ok(/tabtab source for completion packages/.test(filecontent));
           assert.ok(/uninstall by removing these lines/.test(filecontent));
           assert.ok(
             /\[ -f .+foo.bash ] && \. .+tabtab\/.completions\/foo.bash || true/.test(
