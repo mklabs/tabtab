@@ -9,32 +9,16 @@ describe('tabtab basic suite', () => {
   it('has a tabtab.log function', () => {
     assert.equal(typeof tabtab.log, 'function');
 
-    const environment = Object.assign({}, process.env, {
-      COMP_CWORD: 2,
-      COMP_LINE: 'tabtab --foo',
-      COMP_POINT: 12
-    });
 
-    const env = tabtab.parseEnv(environment);
+    const logs = [];
+    const log = console.log;
+    console.log = data => logs.push(data);
 
-    const result = tabtab.log(['--foo', '--bar'], env);
-    assert.deepEqual(result.args, ['--foo']);
-    assert.deepEqual(result.env, env);
-  });
+    tabtab.log(['--foo', '--bar']);
 
-  it('has a tabtab.log function, without env', () => {
-    const result = tabtab.log(['--foo', '--bar']);
-    assert.deepEqual(result.args, ['--foo', '--bar']);
-    assert.deepEqual(result.env, {
-      complete: false,
-      last: '',
-      lastPartial: '',
-      line: '',
-      partial: '',
-      point: 0,
-      prev: undefined,
-      words: 0
-    });
+    console.log = log;
+    assert.equal(logs.length, 2);
+    assert.deepStrictEqual(logs, ['--foo', '--bar']);
   });
 
   it('tabtab.shell()', () => {
