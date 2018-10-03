@@ -10,11 +10,8 @@
     "coverage": "c8 report --reporter=text-lcov | coveralls",
     "eslint": "eslint lib/ test/",
     "watch": "npm-watch",
-    "prettier": "prettier -l '{lib,test}/**/*.js'",
     "quick-test": "DEBUG='tabtab*' node test/fixtures/installer-install.js",
-    "bash-quick-test": "DEBUG=tabtab* COMP_CWORD='2' COMP_LINE='tabtab foo' COMP_POINT='10' tabtab completion -- tabtab foo",
-    "just:a:test": "echo just a test",
-    "just:a:test2": "echo just a test"
+    "bash-quick-test": "DEBUG=tabtab* COMP_CWORD='2' COMP_LINE='tabtab foo' COMP_POINT='10' tabtab completion -- tabtab foo"
   },
   "watch": {
     "test": "{lib,test}/**/*.js"
@@ -25,8 +22,7 @@
     "eslint-config-mklabs": "^1.0.9",
     "inquirer-test": "^2.0.1",
     "mocha": "^5.2.0",
-    "npm-watch": "^0.4.0",
-    "prettier": "^1.14.3"
+    "npm-watch": "^0.4.0"
   },
   "license": "MIT",
   "keywords": [
@@ -43,7 +39,6 @@
   },
   "dependencies": {
     "debug": "^4.0.1",
-    "es6-promisify": "^6.0.0",
     "inquirer": "^6.0.0",
     "minimist": "^1.2.0",
     "untildify": "^3.0.3"
