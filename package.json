@@ -4,9 +4,9 @@
   "description": "tab completion helpers, for node cli programs. Inspired by npm completion.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "DEBUG='tabtab*' nyc mocha --timeout 5000",
+    "test": "DEBUG='tabtab*' c8 mocha --timeout 5000",
     "mocha": "DEBUG='tabtab*' mocha --timeout 5000",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "coverage": "c8 report --reporter=text-lcov | coveralls",
     "watch": "npm-watch",
     "prettier": "prettier -l '{lib,test}/**/*.js'",
     "quick-test": "DEBUG='tabtab*' node test/fixtures/installer-install.js",
@@ -22,8 +22,8 @@
     "inquirer-test": "^2.0.1",
     "mocha": "^5.2.0",
     "npm-watch": "^0.4.0",
-    "nyc": "^13.0.1",
-    "prettier": "^1.14.3"
+    "prettier": "^1.14.3",
+    "c8": "^3.2.0"
   },
   "license": "MIT",
   "keywords": [

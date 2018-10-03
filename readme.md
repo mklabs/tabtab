@@ -14,24 +14,21 @@ node's land.
 
 - Windows is not supported
 - Cache has been removed
-- tabtab now emits the whole line (ex. program foobar) instead of emitting
-  several events at once (program and foobar).
+- Now only support node `> 10.10.0`, for previous version with support for node
+  6/8 be sure to use tabtab `2.2.x`
 
 ### Goal of this 3.0.0 version
 
 Simplify everything, major overhaul, rewrite from scratch.
 
 Functional, less abstraction, clearer documentation, good test coverage,
-support for node 6/8/10 without babel. (_Note_ have issues with node 6 on
-Travis, disabled for now).
+support for node 10 without babel.
 
 Up to date dependencies, easier to debug, easier to test.
 
-If possible, windows support (with git bash)
-
 Should still support bash, zsh and fish but bash is the primary focus of this alpha version.
 
-No binary file anymore, just a library.
+No binary file anymore, just a library (still debating with myself)
 
 The goal of this rewrite is two-folded:
 
