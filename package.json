@@ -4,10 +4,11 @@
   "description": "tab completion helpers, for node cli programs. Inspired by npm completion.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "DEBUG='tabtab*' c8 mocha --timeout 5000",
+    "test": "DEBUG='tabtab*' TABTAB_DEBUG='./test/tabtab.log' c8 mocha --timeout 5000",
     "posttest": "npm run eslint",
     "mocha": "DEBUG='tabtab*' mocha --timeout 5000",
     "coverage": "c8 report --reporter=text-lcov | coveralls",
+    "coverage-html": "npm run mocha && c8 report --reporter=html && serve coverage",
     "eslint": "eslint lib/ test/",
     "watch": "npm-watch",
     "quick-test": "DEBUG='tabtab*' node test/fixtures/installer-install.js",
@@ -22,7 +23,8 @@
     "eslint-config-mklabs": "^1.0.9",
     "inquirer-test": "^2.0.1",
     "mocha": "^5.2.0",
-    "npm-watch": "^0.4.0"
+    "npm-watch": "^0.4.0",
+    "serve": "^10.0.2"
   },
   "license": "MIT",
   "keywords": [

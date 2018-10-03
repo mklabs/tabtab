@@ -26,7 +26,6 @@ describe('tabtab basic suite', () => {
     const result = tabtab.log(['--foo', '--bar']);
     assert.deepEqual(result.args, ['--foo', '--bar']);
     assert.deepEqual(result.env, {
-      args: [],
       complete: false,
       last: '',
       lastPartial: '',
