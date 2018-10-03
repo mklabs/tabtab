@@ -9,9 +9,8 @@ describe('tabtab basic suite', () => {
   it('has a tabtab.log function', () => {
     assert.equal(typeof tabtab.log, 'function');
 
-
     const logs = [];
-    const log = console.log;
+    const { log } = console;
     console.log = data => logs.push(data);
 
     tabtab.log(['--foo', '--bar']);
