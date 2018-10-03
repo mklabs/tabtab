@@ -7,6 +7,7 @@
     "test": "DEBUG='tabtab*' c8 mocha --timeout 5000",
     "mocha": "DEBUG='tabtab*' mocha --timeout 5000",
     "coverage": "c8 report --reporter=text-lcov | coveralls",
+    "eslint": "eslint lib/",
     "watch": "npm-watch",
     "prettier": "prettier -l '{lib,test}/**/*.js'",
     "quick-test": "DEBUG='tabtab*' node test/fixtures/installer-install.js",
@@ -18,12 +19,13 @@
     "test": "{lib,test}/**/*.js"
   },
   "devDependencies": {
+    "c8": "^3.2.0",
     "coveralls": "^3.0.2",
+    "eslint-config-mklabs": "^1.0.9",
     "inquirer-test": "^2.0.1",
     "mocha": "^5.2.0",
     "npm-watch": "^0.4.0",
-    "prettier": "^1.14.3",
-    "c8": "^3.2.0"
+    "prettier": "^1.14.3"
   },
   "license": "MIT",
   "keywords": [

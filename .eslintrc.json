@@ -1,0 +1,7 @@
+{
+  "extends": "mklabs",
+
+  "rules": {
+    "no-unused-vars": ["error", { "argsIgnorePattern": "next" }]
+  }
+}
