@@ -2,8 +2,7 @@
   "name": "tabtab-test-complete",
   "version": "1.0.0",
   "bin": {
-    "tabtab-test": "index.js",
-    "tabtab-test-complete": "completion.js"
+    "tabtab-test": "index.js"
   },
   "description": "Basic test package for tabtab completion",
   "scripts": {
