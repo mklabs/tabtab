@@ -6,10 +6,9 @@ To install, simply run `npm link`
 
     npm link
 
-It'll install the following two binaries system-wide:
+It'll install the following binary system-wide:
 
 - tabtab-test: The actual binary being completed
-- tabtab-test-complete: The completer for the above binary
 
 ## Shell notes
 
@@ -31,7 +30,7 @@ Those steps are not required if testing against your system shell (possibly usin
 
 In this example package, simply run:
 
-    tabtab-test-complete install
+    tabtab-test install-completion
 
 You'll need to do this for each and every shell you're testing against. Follow
 the `Shell notes` described above for details.
