@@ -10,6 +10,8 @@ Made possible using the same technique as npm (whose completion is quite
 awesome) relying on a shell script bridge to do the actual completion from
 node's land.
 
+![tabtab](https://user-images.githubusercontent.com/113832/46506243-deb39b00-c833-11e8-8f5f-7136987e7341.gif)
+
 **Warning / Breaking changes**
 
 -   Windows is not supported
