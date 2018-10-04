@@ -11,19 +11,24 @@
     "coverage-html": "npm run mocha && c8 report --reporter=html && serve coverage",
     "eslint": "eslint lib/ test/",
     "watch": "npm-watch",
-    "quick-test": "DEBUG='tabtab*' node test/fixtures/installer-install.js",
-    "bash-quick-test": "DEBUG=tabtab* COMP_CWORD='2' COMP_LINE='tabtab foo' COMP_POINT='10' tabtab completion -- tabtab foo"
+    "readme": "remark readme.md --use toc --output",
+    "changelog": "auto-changelog",
+    "api": "for file in `echo index.js installer.js prompt.js`; do jsdoc2md lib/$file > api/$file.md; done"
   },
   "watch": {
     "test": "{lib,test}/**/*.js"
   },
   "devDependencies": {
+    "auto-changelog": "^1.8.0",
     "c8": "^3.2.0",
     "coveralls": "^3.0.2",
     "eslint-config-mklabs": "^1.0.9",
     "inquirer-test": "^2.0.1",
+    "jsdoc-to-markdown": "^4.0.1",
     "mocha": "^5.2.0",
     "npm-watch": "^0.4.0",
+    "remark-cli": "^5.0.0",
+    "remark-toc": "^5.0.0",
     "serve": "^10.0.2"
   },
   "license": "MIT",
@@ -44,6 +49,12 @@
     "inquirer": "^6.0.0",
     "minimist": "^1.2.0",
     "untildify": "^3.0.3"
+  },
+  "auto-changelog": {
+    "template": "keepachangelog",
+    "unreleased": true,
+    "commitLimit": false,
+    "ignoreCommitPattern": "changelog|readme|^test"
   },
   "version": "3.0.0-alpha"
 }
