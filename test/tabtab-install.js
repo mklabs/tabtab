@@ -5,7 +5,7 @@ const debug = require('debug')('tabtab:test:install');
 const untildify = require('untildify');
 const path = require('path');
 const fs = require('fs');
-const { promisify } = require('util');
+const { promisify } = require('es6-promisify');
 
 const readFile = promisify(fs.readFile);
 
