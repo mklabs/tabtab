@@ -57,5 +57,5 @@
     "commitLimit": false,
     "ignoreCommitPattern": "changelog|readme|^test"
   },
-  "version": "3.0.0-alpha"
+  "version": "3.0.0-beta"
 }
