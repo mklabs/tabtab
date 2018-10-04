@@ -222,7 +222,7 @@ Tabtab adds a few environment variables for you to inspect and use, this is
 done by calling `tabtab.parseEnv()` method.
 
 ```js
-const env = tabtab.parseEnv();
+const env = tabtab.parseEnv(process.env);
 // env:
 //
 // - complete    A Boolean indicating whether we act in "plumbing mode" or not
