@@ -29,7 +29,18 @@ node's land.
     -   [2. Log completion](#2-log-completion)
     -   [3. Parsing env](#3-parsing-env)
 
+-   [Completion mechanism](#completion-mechanism)
+
+    -   [Completion install](#completion-install)
+    -   [Completion uninstall](#completion-uninstall)
+
+-   [Debugging](#debugging)
+
+-   [API Documentation](#api-documentation)
+
 -   [Changelog](#changelog)
+
+-   [Credits](#credits)
 
 ## Goal of this 3.0.0 version
 
@@ -320,13 +331,11 @@ When testing a completion, it can be useful to see those logs, but writing to
 
 You can use the `TABTAB_DEBUG` environment variable to specify a file to log to instead.
 
-```
-export TABTAB_DEBUG="/tmp/tabtab.log"
-tail -f /tmp/tabtab.log
+    export TABTAB_DEBUG="/tmp/tabtab.log"
+    tail -f /tmp/tabtab.log
 
-# in another shell
-tabtab-test <tab>
-```
+    # in another shell
+    tabtab-test <tab>
 
 See [tabtabDebug.js](./lib/utils/tabtabDebug.js) file for details.
 
