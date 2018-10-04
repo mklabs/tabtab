@@ -324,12 +324,14 @@ Or simply disable tabtab by removing the line in your SHELL configuration file.
 
 ## Debugging
 
-tabtab internally logs a lot of things, using the `[debug](https://www.npmjs.com/package/debug)` package.
+tabtab internally logs a lot of things, using the
+[debug](https://www.npmjs.com/package/debug) package.
 
 When testing a completion, it can be useful to see those logs, but writing to
 `stdout` or `stderr` while completing something can be troublesome.
 
-You can use the `TABTAB_DEBUG` environment variable to specify a file to log to instead.
+You can use the `TABTAB_DEBUG` environment variable to specify a file to log to
+instead.
 
     export TABTAB_DEBUG="/tmp/tabtab.log"
     tail -f /tmp/tabtab.log
