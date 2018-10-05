@@ -76,18 +76,23 @@ const init = async () => {
     // Here we install for the program `tabtab-test` (this file), with
     // completer being the same program. Sometimes, you want to complete
     // another program that's where the `completer` option might come handy.
-    await tabtab.install({
-      name: 'tabtab-test',
-      completer: 'tabtab-test'
-    });
+    await tabtab
+      .install({
+        name: 'tabtab-test',
+        completer: 'tabtab-test'
+      })
+      .catch(err => console.error('INSTALL ERROR', err));
+
     return;
   }
 
   if (cmd === 'uninstall-completion') {
     // Here we uninstall for the program `tabtab-test` (this file).
-    await tabtab.uninstall({
-      name: 'tabtab-test'
-    });
+    await tabtab
+      .uninstall({
+        name: 'tabtab-test'
+      })
+      .catch(err => console.error('UNINSTALL ERROR', err));
     return;
   }
 

@@ -6,6 +6,7 @@ const untildify = require('untildify');
 const path = require('path');
 const fs = require('fs');
 const { promisify } = require('es6-promisify');
+const { COMPLETION_DIR } = require('../lib/constants');
 
 const readFile = promisify(fs.readFile);
 
@@ -18,24 +19,22 @@ describe('tabtab.install()', () => {
     assert.equal(typeof tabtab.install, 'function');
   });
 
-  it('throws on missing options', () => {
-    assert.throws(() => {
-      tabtab.install();
-    }, TypeError);
+  it('throws on missing options', async () => {
+    await assert.rejects(async () => tabtab.install(), TypeError);
   });
 
-  it('throws on missing name options', () => {
-    assert.throws(() => {
-      tabtab.install({});
-    }, /options\.name is required/);
+  it('throws on missing name options', async () => {
+    await assert.rejects(
+      async () => tabtab.install({}),
+      /options\.name is required/
+    );
   });
 
-  it('throws on missing completer options', () => {
-    assert.throws(() => {
-      tabtab.install({
-        name: 'foo'
-      });
-    }, /options\.completer is required/);
+  it('throws on missing completer options', async () => {
+    await assert.rejects(
+      async () => tabtab.install({ name: 'foo' }),
+      /options\.completer is required/
+    );
   });
 
   describe('tabtab.install() on ~/.bashrc', () => {
@@ -78,12 +77,10 @@ describe('tabtab.install()', () => {
         })
         .then(() => readFile(untildify('~/.bashrc'), 'utf8'))
         .then(filecontent => {
-          assert.ok(/tabtab source for completion packages/.test(filecontent));
+          assert.ok(/tabtab source for foo package/.test(filecontent));
           assert.ok(/uninstall by removing these lines/.test(filecontent));
           assert.ok(
-            /\[ -f .+foo.bash ] && \. .+tabtab\/.completions\/foo.bash || true/.test(
-              filecontent
-            )
+            filecontent.match(`. ${path.join(COMPLETION_DIR, '__tabtab.bash')}`)
           );
         });
     });

@@ -19,16 +19,24 @@ describe('installer', () => {
     assert.equal(typeof uninstall, 'function');
   });
 
-  it('both throws on missing options', () => {
-    assert.throws(() => install(), /options.name is required/);
-    assert.throws(
-      () => install({ name: 'foo ' }),
+  it('install rejects on missing options', async () => {
+    await assert.rejects(async () => install(), /options.name is required/);
+    await assert.rejects(
+      async () => install({ name: 'foo ' }),
       /options.completer is required/
     );
 
-    assert.throws(
-      () => install({ name: 'foo ', completer: 'foo-complete' }),
+    await assert.rejects(
+      async () => install({ name: 'foo ', completer: 'foo-complete' }),
       /options.location is required/
+    );
+  });
+
+  it('uninstall rejects on missing options', async () => {
+    await assert.rejects(
+      async () => uninstall(),
+      /Unable to uninstall if options.name is missing/,
+      'Uninstall should throw the expected message when name is missing'
     );
   });
 
@@ -52,12 +60,10 @@ describe('installer', () => {
       })
         .then(() => readFile(untildify('~/.bashrc'), 'utf8'))
         .then(filecontent => {
-          assert.ok(/tabtab source for completion packages/.test(filecontent));
+          assert.ok(/tabtab source for foo package/.test(filecontent));
           assert.ok(/uninstall by removing these lines/.test(filecontent));
           assert.ok(
-            /\[ -f .+__tabtab.bash ] && \. .+tabtab\/.completions\/__tabtab.bash || true/.test(
-              filecontent
-            )
+            filecontent.match(`. ${path.join(COMPLETION_DIR, '__tabtab.bash')}`)
           );
         })
         .then(() =>
@@ -69,9 +75,7 @@ describe('installer', () => {
         .then(filecontent => {
           assert.ok(/tabtab source for foo/.test(filecontent));
           assert.ok(
-            /\[ -f .+foo.bash ] && \. .+tabtab\/.completions\/foo.bash || true/.test(
-              filecontent
-            )
+            filecontent.match(`. ${path.join(COMPLETION_DIR, 'foo.bash')}`)
           );
         }));
   });
