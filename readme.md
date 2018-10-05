@@ -1,7 +1,7 @@
 # tabtab
 
-[![Build Status](https://travis-ci.org/mklabs/tabtab.svg?branch=3.0.0-alpha)](https://travis-ci.org/mklabs/tabtab)
-[![Coverage Status](https://coveralls.io/repos/github/mklabs/tabtab/badge.svg?branch=3.0.0-alpha)](https://coveralls.io/github/mklabs/tabtab?branch=3.0.0-alpha)
+[![Build Status](https://travis-ci.org/mklabs/tabtab.svg?branch=3.0.0)](https://travis-ci.org/mklabs/tabtab)
+[![Coverage Status](https://coveralls.io/repos/github/mklabs/tabtab/badge.svg?branch=3.0.0)](https://coveralls.io/github/mklabs/tabtab?branch=3.0.0)
 
 A node package to do some custom command line `<tab><tab>` completion for any
 system command, for Bash, Zsh, and Fish shells.
