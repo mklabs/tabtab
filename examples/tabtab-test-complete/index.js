@@ -31,6 +31,7 @@ const completion = env => {
     'foo',
     'bar',
     'install-completion',
+    'uninstall-completion',
     'completion',
     'someCommand:someCommand is a some kind of command with a description',
     {
@@ -93,6 +94,7 @@ const init = async () => {
         name: 'tabtab-test'
       })
       .catch(err => console.error('UNINSTALL ERROR', err));
+
     return;
   }
 
