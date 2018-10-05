@@ -10,6 +10,9 @@ const { COMPLETION_DIR } = require('../lib/constants');
 
 const readFile = promisify(fs.readFile);
 
+// For node 7 / 8
+assert.rejects = require('./utils/rejects');
+
 // inquirer-test needs a little bit more time, or my setup
 const TIMEOUT = 500;
 const { ENTER } = run;
@@ -19,18 +22,18 @@ describe('tabtab.install()', () => {
     assert.equal(typeof tabtab.install, 'function');
   });
 
-  it('throws on missing options', async () => {
+  it('rejects on missing options', async () => {
     await assert.rejects(async () => tabtab.install(), TypeError);
   });
 
-  it('throws on missing name options', async () => {
+  it('rejects on missing name options', async () => {
     await assert.rejects(
       async () => tabtab.install({}),
       /options\.name is required/
     );
   });
 
-  it('throws on missing completer options', async () => {
+  it('rejects on missing completer options', async () => {
     await assert.rejects(
       async () => tabtab.install({ name: 'foo' }),
       /options\.completer is required/

@@ -11,6 +11,9 @@ const {
 } = require('../lib/installer');
 const { COMPLETION_DIR } = require('../lib/constants');
 
+// For node 7 / 8
+assert.rejects = require('./utils/rejects');
+
 const readFile = promisify(fs.readFile);
 
 describe('installer', () => {
