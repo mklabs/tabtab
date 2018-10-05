@@ -83,6 +83,14 @@ const init = async () => {
     return;
   }
 
+  if (cmd === 'uninstall-completion') {
+    // Here we uninstall for the program `tabtab-test` (this file).
+    await tabtab.uninstall({
+      name: 'tabtab-test'
+    });
+    return;
+  }
+
   if (cmd === 'completion') {
     const env = tabtab.parseEnv(process.env);
     return completion(env);

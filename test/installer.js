@@ -9,6 +9,7 @@ const {
   writeToShellConfig,
   writeToCompletionScript
 } = require('../lib/installer');
+const { COMPLETION_DIR } = require('../lib/constants');
 
 const readFile = promisify(fs.readFile);
 
@@ -61,7 +62,7 @@ describe('installer', () => {
         })
         .then(() =>
           readFile(
-            path.join(__dirname, '../.completions/__tabtab.bash'),
+            untildify(path.join(COMPLETION_DIR, '__tabtab.bash')),
             'utf8'
           )
         )
