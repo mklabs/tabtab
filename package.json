@@ -13,7 +13,8 @@
     "watch": "npm-watch",
     "readme": "remark readme.md --use toc --output",
     "changelog": "auto-changelog",
-    "api": "for file in `echo index.js installer.js prompt.js`; do jsdoc2md lib/$file > api/$file.md; done"
+    "api": "for file in `echo index.js installer.js prompt.js`; do jsdoc2md lib/$file > api/$file.md; done",
+    "docs": "npm run api && npm run readme && npm run changelog"
   },
   "watch": {
     "test": "{lib,test}/**/*.js"
