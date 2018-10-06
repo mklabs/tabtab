@@ -4,7 +4,7 @@
   "description": "tab completion helpers, for node cli programs. Inspired by npm completion.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "DEBUG='tabtab*' c8 mocha --timeout 5000",
+    "test": "mkdirp ~/.config/tabtab && DEBUG='tabtab*' c8 mocha --timeout 5000",
     "posttest": "npm run eslint",
     "mocha": "DEBUG='tabtab*' mocha --timeout 5000",
     "coverage": "c8 report --reporter=text-lcov | coveralls",
