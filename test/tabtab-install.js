@@ -7,11 +7,12 @@ const path = require('path');
 const fs = require('fs');
 const { promisify } = require('es6-promisify');
 const { COMPLETION_DIR } = require('../lib/constants');
+const { rejects, setupSuiteForInstall } = require('./utils');
 
 const readFile = promisify(fs.readFile);
 
 // For node 7 / 8
-assert.rejects = require('./utils/rejects');
+assert.rejects = rejects;
 
 // inquirer-test needs a little bit more time, or my setup
 const TIMEOUT = 500;
@@ -41,13 +42,9 @@ describe('tabtab.install()', () => {
   });
 
   describe('tabtab.install() on ~/.bashrc', () => {
-    const bashrc = fs.readFileSync(untildify('~/.bashrc'));
+    setupSuiteForInstall();
 
-    afterEach(done => {
-      fs.writeFile(untildify('~/.bashrc'), bashrc, done);
-    });
-
-    it('asks about shell (bash)', () => {
+    it('asks about shell (bash) with custom location', () => {
       const cliPath = path.join(__dirname, 'fixtures/tabtab-install.js');
 
       return run(
@@ -80,7 +77,7 @@ describe('tabtab.install()', () => {
         })
         .then(() => readFile(untildify('~/.bashrc'), 'utf8'))
         .then(filecontent => {
-          assert.ok(/tabtab source for foo package/.test(filecontent));
+          assert.ok(/tabtab source for packages/.test(filecontent));
           assert.ok(/uninstall by removing these lines/.test(filecontent));
           assert.ok(
             filecontent.match(`. ${path.join(COMPLETION_DIR, '__tabtab.bash')}`)

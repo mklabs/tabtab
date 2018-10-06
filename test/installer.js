@@ -9,12 +9,14 @@ const {
   writeToShellConfig,
   writeToCompletionScript
 } = require('../lib/installer');
-const { COMPLETION_DIR } = require('../lib/constants');
+const { COMPLETION_DIR, TABTAB_SCRIPT_NAME } = require('../lib/constants');
+const { rejects, setupSuiteForInstall } = require('./utils');
 
 // For node 7 / 8
-assert.rejects = require('./utils/rejects');
+assert.rejects = rejects;
 
 const readFile = promisify(fs.readFile);
+const writeFile = promisify(fs.writeFile);
 
 describe('installer', () => {
   it('has install / uninstall functions', () => {
@@ -49,10 +51,14 @@ describe('installer', () => {
   });
 
   describe('installer on ~/.bashrc', () => {
-    const bashrc = fs.readFileSync(untildify('~/.bashrc'));
+    setupSuiteForInstall(true);
 
-    afterEach(done => {
-      fs.writeFile(untildify('~/.bashrc'), bashrc, done);
+    before(async () => {
+      // Make sure __tabtab.bash starts with empty content, it'll be restored by setupSuiteForInstall
+      await writeFile(
+        untildify(path.join(COMPLETION_DIR, `${TABTAB_SCRIPT_NAME}.bash`)),
+        ''
+      );
     });
 
     it('installs the necessary line into ~/.bashrc', () =>
@@ -63,7 +69,7 @@ describe('installer', () => {
       })
         .then(() => readFile(untildify('~/.bashrc'), 'utf8'))
         .then(filecontent => {
-          assert.ok(/tabtab source for foo package/.test(filecontent));
+          assert.ok(/tabtab source for packages/.test(filecontent));
           assert.ok(/uninstall by removing these lines/.test(filecontent));
           assert.ok(
             filecontent.match(`. ${path.join(COMPLETION_DIR, '__tabtab.bash')}`)
@@ -79,6 +85,33 @@ describe('installer', () => {
           assert.ok(/tabtab source for foo/.test(filecontent));
           assert.ok(
             filecontent.match(`. ${path.join(COMPLETION_DIR, 'foo.bash')}`)
+          );
+        }));
+
+    it('uninstalls the necessary line from ~/.bashrc and completion scripts', () =>
+      uninstall({
+        name: 'foo'
+      })
+        .then(() => readFile(untildify('~/.bashrc'), 'utf8'))
+        .then(filecontent => {
+          assert.ok(!/tabtab source for packages/.test(filecontent));
+          assert.ok(!/uninstall by removing these lines/.test(filecontent));
+          assert.ok(
+            !filecontent.match(
+              `. ${path.join(COMPLETION_DIR, '__tabtab.bash')}`
+            )
+          );
+        })
+        .then(() =>
+          readFile(
+            untildify(path.join(COMPLETION_DIR, '__tabtab.bash')),
+            'utf8'
+          )
+        )
+        .then(filecontent => {
+          assert.ok(!/tabtab source for foo/.test(filecontent));
+          assert.ok(
+            !filecontent.match(`. ${path.join(COMPLETION_DIR, 'foo.bash')}`)
           );
         }));
   });

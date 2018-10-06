@@ -128,10 +128,25 @@ const run = async () => {
   // completer being the same program. Sometimes, you want to complete
   // another program that's where the `completer` option might come handy.
   if (cmd === 'install-completion') {
-    return await tabtab.install({
-      name: 'tabtab-test',
-      completer: 'tabtab-test'
-    });
+    await tabtab
+      .install({
+        name: 'tabtab-test',
+        completer: 'tabtab-test'
+      })
+      .catch(err => console.error('INSTALL ERROR', err));
+
+    return;
+  }
+
+  if (cmd === 'uninstall-completion') {
+    // Here we uninstall for the program `tabtab-test` (this file).
+    await tabtab
+      .uninstall({
+        name: 'tabtab-test'
+      })
+      .catch(err => console.error('UNINSTALL ERROR', err));
+
+    return;
   }
 
   // The completion command is added automatically by tabtab when the program
@@ -297,24 +312,29 @@ section, installing a completion involves adding a new line to source in either
 In the `3.0.0` version, it has been improved to only add a single line instead
 of multiple ones, one for each completion package installed on the system.
 
-Example for `~/.bashrc` (on [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10))
+This way, a single line is added to enable the completion of for various
+programs without cluttering the Shell configuration file.
+
+Example for `~/.bashrc`
 
 ```bash
-# tabtab source for completion packages
+# tabtab source for packages
 # uninstall by removing these lines
-[ -f /mnt/c/Users/mk/dev/tabtab/.completions/__tabtab.bash ] && . /mnt/c/Users/mk/dev/tabtab/.completions/__tabtab.bash || true
+[ -f ~/.config/tabtab/__tabtab.bash ] && . ~/.config/tabtab/__tabtab.bash || true
 ```
 
-It'll load a file `__tabtab.bash`, created in the
-[`.completions`](./.completions) directory, which will hold all the source
-lines for each tabtab packages defining a completion.
+It'll load a file `__tabtab.bash`, created in the `~/.config/tabtab` directory,
+which will hold all the source lines for each tabtab packages defining a
+completion.
 
 ```bash
-# tabtab source for tabtab-test package
-[ -f /mnt/c/Users/mk/dev/tabtab/.completions/tabtab-test.bash ] && . /mnt/c/Users/mk/dev/tabtab/.completions/tabtab-test.bash || true
-
 # tabtab source for foo package
-[ -f /mnt/c/Users/mk/dev/tabtab/.completions/foo.bash ] && . /mnt/c/Users/mk/dev/tabtab/.completions/foo.bash || true
+# uninstall by removing these lines
+[ -f ~/.config/tabtab/foo.bash ] && . ~/.config/tabtab/foo.bash || true
+
+# tabtab source for tabtab-test package
+# uninstall by removing these lines
+[ -f ~/.config/tabtab/tabtab-test.bash ] && . ~/.config/tabtab/tabtab-test.bash || true
 ```
 
 ### Completion uninstall
@@ -323,6 +343,21 @@ You can follow the file added in your SHELL configuration file and disable a
 completion by removing the above lines.
 
 Or simply disable tabtab by removing the line in your SHELL configuration file.
+
+Or, you can use `tabtab.uninstall()` to do this for you.
+
+```js
+if (cmd === 'uninstall-completion') {
+  // Here we uninstall for the program `tabtab-test`
+  await tabtab
+    .uninstall({
+      name: 'tabtab-test'
+    })
+    .catch(err => console.error('UNINSTALL ERROR', err));
+
+  return;
+}
+```
 
 ## Debugging
 
