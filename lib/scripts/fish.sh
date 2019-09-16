@@ -4,7 +4,7 @@ function _{pkgname}_completion
   set cursor (commandline -C)
   set words (node -pe "'$cmd'.split(' ').length")
 
-  set completions (eval env DEBUG=\"" \"" COMP_CWORD=\""$words\"" COMP_LINE=\""$cmd \"" COMP_POINT=\""$cursor\"" {completer} completion -- $cmd)
+  set completions (eval env DEBUG=\"" \"" COMP_CWORD=\""$words\"" COMP_LINE=\""$cmd \"" COMP_POINT=\""$cursor\"" {completer} {completeCmd} -- $cmd)
 
   for completion in $completions
     echo -e $completion
