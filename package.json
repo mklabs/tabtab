@@ -6,6 +6,9 @@
   "files": [
     "lib/**/*.{js,sh}"
   ],
+  "engines": {
+    "node": ">=12.0.0"
+  },
   "scripts": {
     "test": "mkdirp ~/.config/tabtab && DEBUG='tabtab*' c8 mocha --timeout 5000",
     "posttest": "npm run eslint",
@@ -51,7 +54,7 @@
   "dependencies": {
     "debug": "^4.0.1",
     "es6-promisify": "^6.0.0",
-    "inquirer": "^6.0.0",
+    "inquirer": "^8.2.0",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "untildify": "^3.0.3"
