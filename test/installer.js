@@ -1,4 +1,4 @@
-const assert = require('assert');
+const assert = require('assert').strict;
 const fs = require('fs').promises;
 const path = require('path');
 const untildify = require('untildify');

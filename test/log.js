@@ -1,4 +1,4 @@
-const assert = require('assert');
+const assert = require('assert').strict;
 const tabtab = require('..');
 
 describe('tabtab.log', () => {
@@ -23,7 +23,7 @@ describe('tabtab.log', () => {
     const logs = logTestHelper(['--foo', '--bar']);
 
     assert.equal(logs.length, 2);
-    assert.deepStrictEqual(logs, ['--foo', '--bar']);
+    assert.deepEqual(logs, ['--foo', '--bar']);
   });
 
   it('tabtab.log accepts { name, description }', () => {
@@ -33,7 +33,7 @@ describe('tabtab.log', () => {
     ]);
 
     assert.equal(logs.length, 2);
-    assert.deepStrictEqual(logs, ['--foo', '--bar']);
+    assert.deepEqual(logs, ['--foo', '--bar']);
   });
 
   it('tabtab.log normalize String and Objects', () => {
@@ -44,7 +44,7 @@ describe('tabtab.log', () => {
     ]);
 
     assert.equal(logs.length, 3);
-    assert.deepStrictEqual(logs, ['--foo', '--bar', 'foobar']);
+    assert.deepEqual(logs, ['--foo', '--bar', 'foobar']);
   });
 
   it('tabtab.log normalize String and Objects, with description stripped out on Bash', () => {
@@ -58,7 +58,7 @@ describe('tabtab.log', () => {
     ]);
 
     assert.equal(logs.length, 4);
-    assert.deepStrictEqual(logs, ['--foo', '--bar', 'foobar', 'barfoo']);
+    assert.deepEqual(logs, ['--foo', '--bar', 'foobar', 'barfoo']);
     process.env.SHELL = shell;
   });
 
@@ -73,7 +73,7 @@ describe('tabtab.log', () => {
     ]);
 
     assert.equal(logs.length, 4);
-    assert.deepStrictEqual(logs, [
+    assert.deepEqual(logs, [
       '--foo:Foo option',
       '--bar:Bar option',
       'foobar',
@@ -93,7 +93,7 @@ describe('tabtab.log', () => {
     ]);
 
     assert.equal(logs.length, 4);
-    assert.deepStrictEqual(logs, [
+    assert.deepEqual(logs, [
       '--foo\tFoo option',
       '--bar\tBar option',
       'foobar',
@@ -113,7 +113,7 @@ describe('tabtab.log', () => {
     ]);
 
     assert.equal(logs.length, 4);
-    assert.deepStrictEqual(logs, [
+    assert.deepEqual(logs, [
       '--foo\\:bar:Foo option',
       '--bar\\:foo:Bar option',
       'foobar',

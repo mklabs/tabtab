@@ -1,4 +1,4 @@
-const assert = require('assert');
+const assert = require('assert').strict;
 const tabtab = require('..');
 
 describe('tabtab.parseEnv()', () => {
