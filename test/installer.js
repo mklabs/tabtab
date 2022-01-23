@@ -9,10 +9,7 @@ const {
   writeToCompletionScript
 } = require('../lib/installer');
 const { COMPLETION_DIR, TABTAB_SCRIPT_NAME } = require('../lib/constants');
-const { rejects, setupSuiteForInstall } = require('./utils');
-
-// For node 7 / 8
-assert.rejects = rejects;
+const { setupSuiteForInstall } = require('./utils');
 
 describe('installer', () => {
   it('has install / uninstall functions', () => {

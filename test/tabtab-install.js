@@ -6,10 +6,7 @@ const debug = require('debug')('tabtab:test:install');
 const untildify = require('untildify');
 const tabtab = require('..');
 const { COMPLETION_DIR } = require('../lib/constants');
-const { rejects, setupSuiteForInstall } = require('./utils');
-
-// For node 7 / 8
-assert.rejects = rejects;
+const { setupSuiteForInstall } = require('./utils');
 
 // inquirer-test needs a little bit more time, or my setup
 const TIMEOUT = 500;
