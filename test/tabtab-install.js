@@ -1,15 +1,12 @@
-const tabtab = require('..');
 const assert = require('assert');
+const fs = require('fs').promises;
+const path = require('path');
 const run = require('inquirer-test');
 const debug = require('debug')('tabtab:test:install');
 const untildify = require('untildify');
-const path = require('path');
-const fs = require('fs');
-const { promisify } = require('es6-promisify');
+const tabtab = require('..');
 const { COMPLETION_DIR } = require('../lib/constants');
 const { rejects, setupSuiteForInstall } = require('./utils');
-
-const readFile = promisify(fs.readFile);
 
 // For node 7 / 8
 assert.rejects = rejects;
@@ -75,7 +72,7 @@ describe('tabtab.install()', () => {
             /install completion to ~\/\.bashrc, is it ok \? Yes/.test(result)
           );
         })
-        .then(() => readFile(untildify('~/.bashrc'), 'utf8'))
+        .then(() => fs.readFile(untildify('~/.bashrc'), 'utf8'))
         .then(filecontent => {
           assert.ok(/tabtab source for packages/.test(filecontent));
           assert.ok(/uninstall by removing these lines/.test(filecontent));

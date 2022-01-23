@@ -1,13 +1,8 @@
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
 const untildify = require('untildify');
-const { promisify } = require('es6-promisify');
 const { COMPLETION_DIR, TABTAB_SCRIPT_NAME } = require('../../lib/constants');
-
 const { exists } = require('../../lib/utils');
-
-const writeFile = promisify(fs.writeFile);
-const readFile = promisify(fs.readFile);
 
 /**
  * Returns both { exists, content }
@@ -18,7 +13,7 @@ const readIfExists = async filename => {
   /* eslint-disable no-return-await */
   const filepath = untildify(filename);
   const fileExists = await exists(filepath);
-  const content = fileExists ? await readFile(filepath, 'utf8') : '';
+  const content = fileExists ? await fs.readFile(filepath, 'utf8') : '';
 
   return {
     exists: fileExists,
@@ -32,8 +27,8 @@ const afterWrites = (prevBashrc, prevScript) => async () => {
     path.join(COMPLETION_DIR, `${TABTAB_SCRIPT_NAME}.bash`)
   );
 
-  await writeFile(bashrc, prevBashrc);
-  await writeFile(tabtabScript, prevScript);
+  await fs.writeFile(bashrc, prevBashrc);
+  await fs.writeFile(tabtabScript, prevScript);
 };
 
 /** This simply setup a suite with after hook for tabtab.install.
@@ -73,11 +68,11 @@ const setupSuiteForInstall = async (shouldUseAfter = false) => {
     } = files;
 
     if (bashrcExists) {
-      await writeFile(untildify('~/.bashrc'), bashrcContent);
+      await fs.writeFile(untildify('~/.bashrc'), bashrcContent);
     }
 
     if (tabtabScriptExists) {
-      await writeFile(untildify(tabtabScript), tabtabScriptContent);
+      await fs.writeFile(untildify(tabtabScript), tabtabScriptContent);
     }
   });
 };

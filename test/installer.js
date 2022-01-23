@@ -1,8 +1,7 @@
 const assert = require('assert');
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
 const untildify = require('untildify');
-const { promisify } = require('es6-promisify');
 const {
   install,
   uninstall,
@@ -14,9 +13,6 @@ const { rejects, setupSuiteForInstall } = require('./utils');
 
 // For node 7 / 8
 assert.rejects = rejects;
-
-const readFile = promisify(fs.readFile);
-const writeFile = promisify(fs.writeFile);
 
 describe('installer', () => {
   it('has install / uninstall functions', () => {
@@ -55,7 +51,7 @@ describe('installer', () => {
 
     before(async () => {
       // Make sure __tabtab.bash starts with empty content, it'll be restored by setupSuiteForInstall
-      await writeFile(
+      await fs.writeFile(
         untildify(path.join(COMPLETION_DIR, `${TABTAB_SCRIPT_NAME}.bash`)),
         ''
       );
@@ -67,7 +63,7 @@ describe('installer', () => {
         completer: 'foo-complete',
         location: '~/.bashrc'
       })
-        .then(() => readFile(untildify('~/.bashrc'), 'utf8'))
+        .then(() => fs.readFile(untildify('~/.bashrc'), 'utf8'))
         .then(filecontent => {
           assert.ok(/tabtab source for packages/.test(filecontent));
           assert.ok(/uninstall by removing these lines/.test(filecontent));
@@ -76,7 +72,7 @@ describe('installer', () => {
           );
         })
         .then(() =>
-          readFile(
+          fs.readFile(
             untildify(path.join(COMPLETION_DIR, '__tabtab.bash')),
             'utf8'
           )
@@ -92,7 +88,7 @@ describe('installer', () => {
       uninstall({
         name: 'foo'
       })
-        .then(() => readFile(untildify('~/.bashrc'), 'utf8'))
+        .then(() => fs.readFile(untildify('~/.bashrc'), 'utf8'))
         .then(filecontent => {
           assert.ok(!/tabtab source for packages/.test(filecontent));
           assert.ok(!/uninstall by removing these lines/.test(filecontent));
@@ -103,7 +99,7 @@ describe('installer', () => {
           );
         })
         .then(() =>
-          readFile(
+          fs.readFile(
             untildify(path.join(COMPLETION_DIR, '__tabtab.bash')),
             'utf8'
           )
