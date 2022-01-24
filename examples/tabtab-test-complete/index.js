@@ -1,11 +1,12 @@
 #! /usr/bin/env node
 
-const opts = require('minimist')(process.argv.slice(2), {
+const minimist = require('minimist');
+const tabtab = require('../..');
+
+const opts = minimist(process.argv.slice(2), {
   string: ['foo', 'bar'],
   boolean: ['help', 'version', 'loglevel']
 });
-
-const tabtab = require('../..');
 
 const args = opts._;
 

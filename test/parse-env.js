@@ -1,17 +1,16 @@
-const tabtab = require('..');
 const assert = require('assert');
+const tabtab = require('..');
 
 describe('tabtab.parseEnv()', () => {
   it('parseEnv with COMP stuff', () => {
     assert.equal(typeof tabtab.parseEnv, 'function');
 
-    const result = tabtab.parseEnv(
-      Object.assign({}, process.env, {
-        COMP_CWORD: 3,
-        COMP_LINE: 'foo bar baz',
-        COMP_POINT: 11
-      })
-    );
+    const result = tabtab.parseEnv({
+      ...process.env,
+      COMP_CWORD: 3,
+      COMP_LINE: 'foo bar baz',
+      COMP_POINT: 11
+    });
 
     assert.deepEqual(result, {
       complete: true,
@@ -26,7 +25,7 @@ describe('tabtab.parseEnv()', () => {
   });
 
   it('parseEnv without COMP stuff', () => {
-    const result = tabtab.parseEnv(Object.assign({}, process.env));
+    const result = tabtab.parseEnv({ ...process.env });
     assert.equal(result.complete, false);
   });
 });

@@ -1,11 +1,11 @@
-const tabtab = require('..');
 const assert = require('assert');
+const tabtab = require('..');
 
 describe('tabtab.log', () => {
-  it('tabtab.log throws an Error in case args is not an Array', () => {
+  it('tabtab.log throws a TypeError in case args is not an Array', () => {
     assert.throws(() => {
       tabtab.log('foo', 'bar');
-    }, /^Error: log: Invalid arguments, must be an array$/);
+    }, /^TypeError: log: Invalid arguments, must be an array$/);
   });
 
   const logTestHelper = items => {

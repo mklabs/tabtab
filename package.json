@@ -13,7 +13,7 @@
     "mocha": "DEBUG=\"tabtab*\" mocha --timeout 5000",
     "coverage": "c8 report --reporter=text-lcov | coveralls",
     "coverage-html": "npm run mocha && c8 report --reporter=html && serve coverage",
-    "eslint": "eslint lib/ test/",
+    "eslint": "eslint examples/ lib/ test/ --report-unused-disable-directives",
     "watch": "npm-watch",
     "readme": "remark readme.md --use toc --output",
     "changelog": "auto-changelog -p",

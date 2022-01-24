@@ -4,7 +4,9 @@ A simple package to test out tabtab against real completions.
 
 To install, simply run `npm link`
 
-    npm link
+```sh
+npm link
+```
 
 It'll install the following binary system-wide:
 
@@ -30,7 +32,9 @@ Those steps are not required if testing against your system shell (possibly usin
 
 In this example package, simply run:
 
-    tabtab-test install-completion
+```sh
+tabtab-test install-completion
+``
 
 You'll need to do this for each and every shell you're testing against. Follow
 the `Shell notes` described above for details.

@@ -10,7 +10,6 @@ const { exists } = require('../../lib/utils');
  * @param {filename} filename - The file to check and read
  */
 const readIfExists = async filename => {
-  /* eslint-disable no-return-await */
   const filepath = untildify(filename);
   const fileExists = await exists(filepath);
   const content = fileExists ? await fs.readFile(filepath, 'utf8') : '';
