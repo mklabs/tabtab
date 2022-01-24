@@ -11,7 +11,7 @@
     "test": "mkdir -p ~/.config/tabtab && DEBUG=\"tabtab*\" c8 mocha --timeout 5000",
     "posttest": "npm run eslint",
     "mocha": "DEBUG=\"tabtab*\" mocha --timeout 5000",
-    "coverage": "c8 report --reporter=text-lcov | coveralls",
+    "coverage": "c8 report --reporter=text-lcov",
     "coverage-html": "npm run mocha && c8 report --reporter=html && serve coverage",
     "eslint": "eslint examples/ lib/ test/ --report-unused-disable-directives",
     "watch": "npm-watch",
@@ -31,7 +31,6 @@
   "devDependencies": {
     "auto-changelog": "^2.4.0",
     "c8": "^7.11.0",
-    "coveralls": "^3.1.1",
     "eslint-config-mklabs": "^1.0.9",
     "inquirer-test": "^2.0.1",
     "jsdoc-to-markdown": "^7.1.1",
