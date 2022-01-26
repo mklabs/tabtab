@@ -15,7 +15,7 @@
     "eslint": "eslint lib/ test/",
     "watch": "npm-watch",
     "readme": "remark readme.md --use toc --output",
-    "changelog": "auto-changelog",
+    "changelog": "auto-changelog -p",
     "api": "for file in `echo index.js installer.js prompt.js`; do jsdoc2md lib/$file > api/$file.md; done",
     "docs": "npm run api && npm run readme && npm run changelog"
   },
@@ -62,5 +62,5 @@
     "commitLimit": false,
     "ignoreCommitPattern": "changelog|readme|^test"
   },
-  "version": "3.0.2"
+  "version": "3.0.3"
 }
