@@ -31,7 +31,7 @@
     "jsdoc-to-markdown": "^4.0.1",
     "mocha": "^5.2.0",
     "npm-watch": "^0.4.0",
-    "remark-cli": "^5.0.0",
+    "remark-cli": "^11.0.0",
     "remark-toc": "^5.0.0",
     "serve": "^10.0.2"
   },
